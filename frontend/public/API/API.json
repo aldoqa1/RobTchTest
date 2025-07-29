@@ -1,0 +1,48 @@
+{
+  "cameras": [
+    {
+      "id": 1,
+      "status": "online",
+      "name": "Câmera 1",
+      "url": "https://channel01-onlymex.akamaized.net/hls/live/2022749/event01/index.m3u8",
+      "altitude": 23,
+      "longitude": 100
+    },
+    {
+      "id": 2,
+      "status": "online",
+      "name": "Câmera 2",
+      "url": "https://azt-mun.otteravision.com/azt/mun/mun.m3u8",
+      "altitude": 21,
+      "longitude": 1440
+    },
+      {
+      "id": 3,
+      "status": "online",
+      "name": "Câmera 3",
+      "url": "https://stream.fs1.tv/hls/webstream.m3u8",
+      "altitude": 21,
+      "longitude": 1440
+    },
+      {
+      "id": 4,
+      "status": "online",
+      "name": "Câmera 4",
+      "url": "https://amg02855-foxsports-amg02855c1-xumo-us-1755.playouts.now.amagi.tv/Fox-Sports-AmazonNews/playlist.m3u8",
+      "altitude": 21,
+      "longitude": 1440
+    }
+  ],
+  "epis": [
+    "botas",
+    "capacete",
+    "oculos"
+  ],
+  "alerts": [
+    {
+      "id": 1,
+      "url": "sss",
+      "type": "EPI"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+.cameraCard {
+  position: relative;
+  flex-direction: column;
+  
+}
+
+.cameraCard .inner{
+  overflow-x: hidden;
+  position: relative;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+.cameraCard .top, .cameraCard .bottom {
+  position: absolute;
+  top: 0;
+  left: 1;
+  padding: 10px 10px;
+  display: flex;
+  width: 100%;
+  height: 60px;
+  z-index: 2;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.cameraCard .top span{
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.cameraCard .top .circle{
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+  display: inline-flex;
+}
+
+.cameraCard .top.online .circle{
+  background-color: var(--greenColor);
+}
+
+.cameraCard .top.offline .circle{
+  background-color: var(--redColor);
+}
+
+.cameraCard .top.online span{
+  color: var(--greenColor);
+}
+
+.cameraCard .top.offline span{
+  color: var(--redColor);
+}
+
+.cameraCard .top.alerts .circle{
+  background-color: var(--yellowColor);
+}
+
+.cameraCard .top.alerts span{
+  color: var(--yellowColor);
+}
+
+.cameraCard .bottom{
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  background: linear-gradient(to bottom,  rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  top: calc(100% - 60px);
+  left: 0;
+}
+
+.cameraCard .icon.settings{
+  z-index: 10;
+}
+
+.cameraCard .icon.settings::after{
+  mask-image: url("./../../images/settings.svg");
+}
+
+/*Dropdown */
+.optionsCamera.dropdown{
+  position: relative !important;
+  top: 0;
+  left: 90%;
+  transform: translateY(-30px);
+  z-index: 100;
+  width: fit-content;
+}
+
+.optionsCamera .dropdown-menu{
+  width: fit-content !important;
+  min-width: fit-content !important;
+  font-size: 12px; 
+}
+
+.optionsCamera .dropdown-menu .dropdown-item a{
+  width: fit-content !important; 
+}
+
+.optionsCamera .dropdown-menu .dropdown-item{
+  background-color: transparent;  
+  color: var(--mainColor);
+}
+
+.optionsCamera .dropdown-menu .dropdown-item:hover{
+  background-color: rgb(236, 234, 234);  
+}
+
+.optionsCamera .icon.edit, .optionsCamera .icon.delete{
+  width: 14px;
+  height: 14px;
+  margin-left: 5PX;
+}
+
+.optionsCamera .icon.edit::after, .optionsCamera .icon.delete::after{
+  margin-left: auto;
+  mask-image: url("./../../images/edit.svg");
+  background-color: var(--mainColor);
+}
+
+.optionsCamera .icon.delete::after{
+  mask-image: url("./../../images/delete.svg");
+}
+
+/*Video container*/
+.videoContainer {
+  position: relative;
+  width: 100%;
+  background-color:var(--secundaryColor);
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+}
+
+.videoContainer video,
+.videoContainer canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  
+}
+
+.videoContainer canvas {
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 1;
+}

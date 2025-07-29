@@ -1,0 +1,19 @@
+header{
+    padding: 30px 0;
+}
+
+header .icon.add::after{
+    mask-image: url("./../../images/add.svg");
+    background-color: var(--greenColor);
+}
+
+header .icon.back{
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+header .icon.back::after{
+    mask-image: url("./../../images/back.svg");
+    background-color: var(--whiteColor);
+}
