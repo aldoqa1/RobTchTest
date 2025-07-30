@@ -10,11 +10,12 @@ function CameraCard({ camera }) {
     const { data, setData, setCurrentView, setLastView, currentView, setChoosenId, alert, setTypeModal, setShowModal } = useContext(GlobalContext);
     const videoRef = useRef();
 
+    const canvasBoxRef = useRef();
+
     useEffect(() => {
 
         const src = camera.url;
         const video = videoRef.current;
-        turningCamera("online");
         if (Hls.isSupported()) {
             const hls = new Hls();
             hls.loadSource(src);
@@ -25,23 +26,52 @@ function CameraCard({ camera }) {
                 turningCamera("offline");
             });
 
+            //when it starts it turns the video online
+            function handlePlaying(){
+                turningCamera("online");
+            };
+            
             // It plays automatically the video
-            const handlePause = () => {
+            function handlePause(){
                 if (video.paused) {
-                    turningCamera("online");
                     video.play().catch(err => {
                         console.warn("It is not possible to play the stream:", err);
                         turningCamera("offline");
                     });
                 }
             };
+                    
+            //random interval between min 3 min - 6 min
+            const interval = setInterval(()=>{
 
+                if(camera.status === "online" || camera.status === "alert"){
+                    const canvasBox = canvasBoxRef.current;
+                    const contextBox = canvasBox.getContext("2d");
+                    const container = canvasBox.parentElement;
+                    const w = canvasBox.width = container.clientWidth;
+                    const h = canvasBox.height = container.clientHeight;
+                    contextBox.lineWidth = 2;
+                    contextBox.strokeStyle = "yellow";
+
+                    setTimeout(() => {
+                        contextBox.clearRect(0, 0, canvasBox.width, canvasBox.height);           
+                    }, 10000);
+
+                    contextBox.strokeRect(Math.random() * 0.84 * w + 1,  Math.random() * 0.59 * h + 1, w*.15 , h*.4);            
+                }
+
+            },Math.random() * 18000 + 2000 );
+
+            
+            video.addEventListener("playing", handlePlaying);
             video.addEventListener("pause", handlePause);
 
             //This function clean the component by destroying the hls and deattaching the event listener (to free memory)
             return function cleanComponent() {
                 hls.destroy();
                 video.removeEventListener("pause", handlePause);
+                video.removeEventListener("playing", handlePlaying);
+                clearInterval(interval);
             };
 
         } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
@@ -116,6 +146,8 @@ function CameraCard({ camera }) {
 
     }
 
+
+
     return (
 
         <div className="camera-card">
@@ -132,6 +164,9 @@ function CameraCard({ camera }) {
                         autoPlay
                         playsInline
                         muted
+                    />
+                    <canvas
+                        ref={canvasBoxRef}
                     />
                 </div>
 

@@ -14,6 +14,7 @@ function CameraView() {
 
     //canvas
     const canvasRef = useRef();
+    const canvasBoxRef = useRef();
     const xInitial = useRef(0);
     const xWidth = useRef(0);
     const yInitial = useRef(0);
@@ -279,7 +280,6 @@ function CameraView() {
         canvas.addEventListener("mouseleave", handleMouseLeave);
 
         //it turns the camera onlien by default
-        turningCamera("online");
 
         if (Hls.isSupported()) {
             const hls = new Hls();
@@ -291,10 +291,14 @@ function CameraView() {
                 turningCamera("offline");
             });
 
+            //when it starts it turns the video online
+            function handlePlaying() {
+                turningCamera("online");
+            };
+
             // It plays automatically the video
-            const handlePause = () => {
+            function handlePause() {
                 if (video.paused) {
-                    turningCamera("online");
                     video.play().catch(err => {
                         console.warn("It is not possible to play the stream:", err);
                         turningCamera("offline");
@@ -302,12 +306,36 @@ function CameraView() {
                 }
             };
 
+            //random interval between min 3 min - 6 min
+            const interval = setInterval(() => {
+
+                if (camera.status === "online" || camera.status === "alert") {
+                    const canvasBox = canvasBoxRef.current;
+                    const contextBox = canvasBox.getContext("2d");
+                    const container = canvasBox.parentElement;
+                    const w = canvasBox.width = container.clientWidth;
+                    const h = canvasBox.height = container.clientHeight;
+                    contextBox.lineWidth = 2;
+                    contextBox.strokeStyle = "yellow";
+
+                    setTimeout(() => {
+                        contextBox.clearRect(0, 0, canvasBox.width, canvasBox.height);
+                    }, 10000);
+
+                    contextBox.strokeRect(Math.random() * 0.84 * w + 1, Math.random() * 0.59 * h + 1, w * .15, h * .4);
+                }
+
+            }, Math.random() * 18000 + 2000);
+
             video.addEventListener("pause", handlePause);
+            video.addEventListener("playing", handlePlaying);
 
             //This function clean the component by destroying the hls and deattaching the event listener (to free memory)
             return function cleanComponent() {
                 hls.destroy();
                 video.removeEventListener("pause", handlePause);
+                video.removeEventListener("playing", handlePlaying);
+                clearInterval(interval);
             };
 
         } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
@@ -354,6 +382,7 @@ function CameraView() {
             context.fillText(restrictRef.current, (event.offsetX + xInitial.current) / 2, yInitial.current < event.offsetY ? yInitial.current + 10 : event.offsetY + 10);
         }
 
+
         //it cleans the component (removing the events in memory)
         return function cleanComponent() {
             canvas.removeEventListener("mousedown", handleMouseDown);
@@ -384,26 +413,28 @@ function CameraView() {
     }, [showRestrictAreas]);
 
 
-    function setEPI(event, epiId){
+
+
+    function setEPI(event, epiId) {
 
         let copyData = JSON.parse(JSON.stringify(data));
 
-        if(event.target.checked){
-            
+        if (event.target.checked) {
+
             copyData.cameras = copyData.cameras.map(cam => {
                 if (cam.id == camera.id) {
-                    cam.epis = [...cam.epis,epiId];
+                    cam.epis = [...cam.epis, epiId];
                 }
                 return cam;
             });
 
-        }else{
-                 
+        } else {
+
             copyData.cameras = copyData.cameras.map(cam => {
                 if (cam.id == camera.id) {
 
-                    cam.epis = cam.epis.filter((c)=> c != epiId);
-    
+                    cam.epis = cam.epis.filter((c) => c != epiId);
+
                 }
                 return cam;
             });
@@ -433,6 +464,10 @@ function CameraView() {
                         autoPlay
                         playsInline
                         muted
+                    />
+
+                    <canvas
+                        ref={canvasBoxRef}
                     />
 
                     <canvas className={(restrictStep === "save" || restrictStep === "update" || showRestrictAreas) ? "d-block" : "d-none"}
@@ -494,28 +529,28 @@ function CameraView() {
                 <section className="epis">
                     <h3 className="my-4">EPIS</h3>
                     <div>
-                       
-                        {data.epis && data.epis.length > 0 ? data.epis.map((epi)=>{
+
+                        {data.epis && data.epis.length > 0 ? data.epis.map((epi) => {
 
                             let checked = camera.epis.find(element => element == epi.id) || false;
 
-                            return ( 
-                            
-                            <div key={epi.id} className={`${checked ? "checked " : "unchecked "} epi me-3 mt-3 align-items-center`}>{epi.name}<input className="ms-2" checked={checked} type="checkbox" onChange={(e)=>{setEPI(e,epi.id)}} /></div>
-                        
-                        )
-                        }) 
-                        :
-                        <div>Sem epis</div>
+                            return (
+
+                                <div key={epi.id} className={`${checked ? "checked " : "unchecked "} epi me-3 mt-3 align-items-center`}>{epi.name}<input className="ms-2" checked={checked} type="checkbox" onChange={(e) => { setEPI(e, epi.id) }} /></div>
+
+                            )
+                        })
+                            :
+                            <div>Sem epis</div>
                         }
-                        
+
                     </div>
                 </section>
 
 
 
                 <section className="alerts">
-                    <h3 className="my-4">Alertas</h3>
+                    <h3 className="my-4 pt-3">Alertas</h3>
                     <div className="alert d-flex flex-column flex-sm-row px-4 mb-3">
                         <div className="img-container">
                             <img src="./alerts/cam1.jpg" alt="imagem alerta" />
