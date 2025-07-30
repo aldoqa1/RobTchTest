@@ -1,27 +1,32 @@
 import './index.css';
-import DashboardPage from './pages/DashboardPage';
+import DashboardView from './views/DashboardView';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { GlobalContext } from './context/GlobalContext';
 import { useContext } from 'react';
-import CameraPage from './pages/CameraPage';
-import AlertsPage from './pages/AlertsPage';
-import StatisticsPage from './pages/StatisticsPage';
+import CameraView from './views/CameraView';
+import AlertsView from './views/AlertsView';
+import StatisticsView from './views/StatisticsView';
+import ModalGeneral from './components/ModalGeneral';
 
 function App() {
 
-  const { currentPage } = useContext(GlobalContext);
+  const { currentView } = useContext(GlobalContext);
 
   return (
     <div className='container'>
+      
       <Header />
 
-      {currentPage === "DashboardPage" && <DashboardPage />}
-      {currentPage === "CameraPage" && <CameraPage />}
-      {currentPage === "AlertsPage" && <AlertsPage />}
-      {currentPage === "StatisticsPage" && <StatisticsPage />}
+      {currentView === "DashboardView" && <DashboardView />}
+      {currentView === "CameraView" && <CameraView />}
+      {currentView === "AlertsView" && <AlertsView />}
+      {currentView === "StatisticsView" && <StatisticsView />}
 
       <Footer />
+
+      <ModalGeneral />
+
     </div>
   );
 }

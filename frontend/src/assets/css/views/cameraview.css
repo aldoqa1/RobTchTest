@@ -1,0 +1,134 @@
+.camera-view .video-container{
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
+}
+
+.camera-view .video-container .cancel{
+    position: absolute;
+    bottom: -50px;
+    right: 80px;
+    color: var(--redColor);
+    border-color: var(--redColor);
+}
+.camera-view .video-container .save{
+    position: absolute;
+    bottom: -50px;
+    right: 0;
+    color: var(--greenColor);
+    border-color: var(--greenColor);
+}
+
+.camera-view .title{
+    max-width: 800px;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.camera-view .online, .camera-view .offline,.camera-view .alert{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.camera-view .online{
+    color: var(--greenColor);
+    background-color: rgb(37, 54, 27);
+
+}
+
+.camera-view .offline{
+    color: var(--redColor);
+    background-color: rgb(54, 31, 27);
+}
+
+.camera-view .alert{
+    color: var(--yellowColor);
+    background-color: rgb(37, 54, 27);
+}
+
+.camera-view .circle{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--greenColor);
+    display: inline-block;
+}
+
+.camera-view .offline .circle{
+    background-color: var(--redColor);
+}
+
+.camera-view .alert .circle{
+    background-color: var(--yellowColor);
+}
+
+.camera-view .alerts{
+    max-width: 800px;
+    margin: 10px auto;
+}
+
+.camera-view .alert{
+    margin: 10px auto 0 0;
+    background-color: var(--secundaryColor);
+    width: auto;
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
+}
+
+.camera-view .alert h4{
+    color: var(--yellowColor);
+}
+.camera-view .img-container{
+    
+    height: 150px;
+    width: 40%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.camera-view .img-container img{
+    width: 100%;
+}
+
+
+.camera-view .restricts{
+    max-width: 800px;
+    width: 100%;
+    margin: 30px auto;
+}
+
+.camera-view .restricts .add-area{
+    height: fit-content;
+    margin: auto 0;
+    display: flex;
+    align-items: center;
+    border-color: var(--greenColor);
+    color: var(--greenColor);
+    padding: 10px;
+    margin: auto 0;
+}
+
+.camera-view .restricts .name-area input{
+    height: fit-content;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 1px solid var(--whiteColor);
+    padding: 4px;
+    color: var(--whiteColor);
+}
+
+
+.camera-view .restricts .name-area .check-name{
+    height: fit-content;
+}
+
+
+.camera-view .check{
+    max-width: 800px;
+    margin: 0 auto 0;
+}

@@ -3,7 +3,6 @@ header{
 }
 
 header .icon.add::after{
-    mask-image: url("./../../images/add.svg");
     background-color: var(--greenColor);
 }
 
@@ -16,4 +15,22 @@ header .icon.back{
 header .icon.back::after{
     mask-image: url("./../../images/back.svg");
     background-color: var(--whiteColor);
+}
+
+
+@media (max-width: 576px) {
+  .add-container{
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+  }
+
+  .add-container button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    width: 100%;
+  }
+
 }

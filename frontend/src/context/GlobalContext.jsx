@@ -3,9 +3,10 @@ import Swal from "sweetalert2";
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) =>{
+
     const [data, setData] = useState ([{}]);
-    const [currentPage, setCurrentPage] = useState ("DashboardPage");
-    const [lastPage, setLastPage] = useState ("DashboardPage");
+    const [currentView, setCurrentView] = useState ("DashboardView");
+    const [lastView, setLastView] = useState ("DashboardView");
     const [showModal, setShowModal] = useState (false);
     const [typeModal, setTypeModal] = useState ("");
     const [choosenId, setChoosenId] = useState (0);
@@ -17,13 +18,13 @@ export const GlobalProvider = ({ children }) =>{
         icon: icon,
         title: title,
         timer: 4000,
-        text: text,
+        text: text
       });      
     }, 0);
 
   }
   return (
-    <GlobalContext.Provider value={{ data, setData, currentPage, setCurrentPage, lastPage, setLastPage, showModal, setShowModal, typeModal, setTypeModal, choosenId, setChoosenId, alert }}>
+    <GlobalContext.Provider value={{ data, setData, currentView, setCurrentView, lastView, setLastView, showModal, setShowModal, typeModal, setTypeModal, choosenId, setChoosenId, alert }}>
       {children}
     </GlobalContext.Provider>
   );

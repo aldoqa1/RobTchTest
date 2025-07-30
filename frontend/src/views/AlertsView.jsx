@@ -1,6 +1,6 @@
-import "./../assets/css/pages/alertsPage.css";
+import "./../assets/css/views/alertsview.css";
 
-function AlertsPage() {
+function AlertsView() {
 
     return (
 
@@ -13,4 +13,4 @@ function AlertsPage() {
     );
 }
 
-export default AlertsPage;
+export default AlertsView;

@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import './../assets/css/pages/dashboardPage.css';
+import './../assets/css/views/dashboardview.css';
 import CameraCard from '../components/CameraCard';
 import { GlobalContext } from '../context/GlobalContext';
 
-function DashboardPage() {
+function DashboardView() {
 
 
     const { data, setData } = useContext(GlobalContext);
@@ -38,17 +38,21 @@ function DashboardPage() {
 
 
     return (
+        
         <div className='dashboard'>
 
-            <div className="grid">
-                {data.cameras && data.cameras.map(camera => {
-                    return <CameraCard key={camera.id} camera={camera} />
-                })}
+            <div className="row g-3">
+                {data.cameras && data.cameras.map(camera => (
+                <div key={camera.id} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                    <CameraCard camera={camera} />
+                </div>))}
             </div>
+                
+            <div onClick={()=>{console.log(data)}}>ver valor</div>
 
         </div>
 
     );
 }
 
-export default DashboardPage;
+export default DashboardView;

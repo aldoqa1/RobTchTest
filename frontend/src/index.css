@@ -46,6 +46,25 @@ body{
   cursor:                                   pointer;
 }
 
+.icon.settings::after{
+  mask-image:                               url("./assets/images/settings.svg");
+}
+
+.icon.edit::after, .icon.delete::after{
+  mask-image:                               url("./assets/images/edit.svg");
+  background-color:                         var(--mainColor);
+}
+
+.icon.delete::after{
+  mask-image:                               url("./assets/images/delete.svg");
+  background-color:                         var(--redColor);
+}
+
+.icon.add::after{
+  mask-image:                               url("./assets/images/add.svg");
+  background-color:                         var(--greenColor);
+}
+
 button{
   padding:                                  0;
   position:                                 relative ; 
@@ -90,6 +109,10 @@ p, h1, h2, h3, h4, h5, a{
   color:                                    var(--whiteColor); 
 }
 
+h1, h2, h3, h4, h5{
+  font-weight: bold;
+}
+
 h1{
   font-size:                                45px;
 }
@@ -116,7 +139,7 @@ h5{
   background-color:                         transparent;
   border:                                   1px solid var(--whiteColor);
   border-radius:                            5px;
-  color:                                    var(--whiteColor);
+  color:                                    var(--mainColor);
   padding:                                  5px 10px;
   outline:                                  none;
   transition:                               all 0.5s ease;
@@ -137,6 +160,30 @@ h5{
   background-color:                         rgba(3, 3, 3, 0);
   border:                                   none;
 }
+
+.dropup .dropdown-toggle::after{
+  display: none;
+}
+
+.dropdown-menu{
+  width: fit-content !important;
+  min-width: fit-content !important;
+  font-size: 14px; 
+}
+
+.dropdown-menu .dropdown-item a{
+  width: fit-content !important; 
+}
+
+.dropdown-menu .dropdown-item{
+  background-color: transparent;  
+  color: var(--mainColor);
+}
+
+.dropdown-menu .dropdown-item:hover{
+  background-color: rgb(236, 234, 234);  
+}
+
 @media (max-width: 991px) {
 
   h1{

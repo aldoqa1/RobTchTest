@@ -4,37 +4,39 @@ import { useContext } from "react";
 
 function Header() {
 
-    const {setLastPage, setCurrentPage, lastPage, setShowModal, setTypeModal, currentPage} = useContext(GlobalContext);
+    const {setLastView, setCurrentView, lastView, setShowModal, setTypeModal, currentView} = useContext(GlobalContext);
 
     function goHome(){
-        setLastPage(currentPage);
-        setCurrentPage("DashboardPage");
+        setLastView(currentView);
+        setCurrentView("DashboardView");
     }
 
     function addCamera(){
         setShowModal(true);
-        setTypeModal("AddCamera");
+        setTypeModal("newCamera");
     }
 
     function goBack(){
-        setLastPage(currentPage);
-        setCurrentPage(lastPage);
+        setLastView(currentView);
+        setCurrentView(lastView);
     }
 
     
 
     return (
 
-        <header className="d-flex align-items-center justify-content-between">
+        <header className="d-flex flex-column flex-sm-row align-items-center justify-content-between">
 
             <div className="d-flex align-items-center">
-                {currentPage !== "DashboardPage" && <div className="icon back" onClick={goBack}></div>}
+                {currentView !== "DashboardView" && <div className="icon back d-sm-flex d-none" onClick={goBack}></div>}
                 <h1 className="cursor-pointer" onClick={goHome}>NeuroWatch</h1>
             </div>
             
             
-            <div className="addContainer">
-                {currentPage === "DashboardPage" && <button className="d-flex done" onClick={addCamera} > <div className="icon add me-2"></div> Adicionar câmera</button>}
+            <div className="add-container">
+                {currentView !== "DashboardView" && <div className="icon back d-flex d-sm-none" onClick={goBack}></div>}
+
+                <button className="d-flex done" onClick={addCamera} > <div className="icon add me-2"></div> Adicionar câmera</button>
             </div>
 
         </header>

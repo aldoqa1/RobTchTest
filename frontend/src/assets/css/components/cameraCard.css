@@ -1,17 +1,17 @@
-.cameraCard {
+.camera-card {
   position: relative;
   flex-direction: column;
   
 }
 
-.cameraCard .inner{
+.camera-card .inner{
   overflow-x: hidden;
   position: relative;
   flex-direction: column;
   border-radius: 8px;
 }
 
-.cameraCard .top, .cameraCard .bottom {
+.camera-card .top, .camera-card .bottom {
   position: absolute;
   top: 0;
   left: 1;
@@ -24,44 +24,44 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
-.cameraCard .top span{
+.camera-card .top span{
   font-size: 12px;
   font-weight: bold;
   margin-top: 4px;
 }
 
-.cameraCard .top .circle{
+.camera-card .top .circle{
   border-radius: 50%;
   width: 7px;
   height: 7px;
   display: inline-flex;
 }
 
-.cameraCard .top.online .circle{
+.camera-card .top.online .circle{
   background-color: var(--greenColor);
 }
 
-.cameraCard .top.offline .circle{
+.camera-card .top.offline .circle{
   background-color: var(--redColor);
 }
 
-.cameraCard .top.online span{
+.camera-card .top.online span{
   color: var(--greenColor);
 }
 
-.cameraCard .top.offline span{
+.camera-card .top.offline span{
   color: var(--redColor);
 }
 
-.cameraCard .top.alerts .circle{
+.camera-card .top.alerts .circle{
   background-color: var(--yellowColor);
 }
 
-.cameraCard .top.alerts span{
+.camera-card .top.alerts span{
   color: var(--yellowColor);
 }
 
-.cameraCard .bottom{
+.camera-card .bottom{
   display: flex;
   justify-content: end;
   align-items: end;
@@ -70,16 +70,12 @@
   left: 0;
 }
 
-.cameraCard .icon.settings{
+.camera-card .icon.settings{
   z-index: 10;
 }
 
-.cameraCard .icon.settings::after{
-  mask-image: url("./../../images/settings.svg");
-}
-
 /*Dropdown */
-.optionsCamera.dropdown{
+.options-camera.dropdown{
   position: relative !important;
   top: 0;
   left: 90%;
@@ -88,43 +84,20 @@
   width: fit-content;
 }
 
-.optionsCamera .dropdown-menu{
-  width: fit-content !important;
-  min-width: fit-content !important;
-  font-size: 12px; 
-}
 
-.optionsCamera .dropdown-menu .dropdown-item a{
-  width: fit-content !important; 
-}
-
-.optionsCamera .dropdown-menu .dropdown-item{
-  background-color: transparent;  
-  color: var(--mainColor);
-}
-
-.optionsCamera .dropdown-menu .dropdown-item:hover{
-  background-color: rgb(236, 234, 234);  
-}
-
-.optionsCamera .icon.edit, .optionsCamera .icon.delete{
-  width: 14px;
-  height: 14px;
+.options-camera .icon.edit, .options-camera .icon.delete{
+  width: 18px;
+  height: 18px;
   margin-left: 5PX;
 }
 
-.optionsCamera .icon.edit::after, .optionsCamera .icon.delete::after{
-  margin-left: auto;
-  mask-image: url("./../../images/edit.svg");
-  background-color: var(--mainColor);
-}
-
-.optionsCamera .icon.delete::after{
-  mask-image: url("./../../images/delete.svg");
+.camera-card .dropdown p{
+  color: var(--mainColor);
+  margin-bottom: 0;
 }
 
 /*Video container*/
-.videoContainer {
+.video-container {
   position: relative;
   width: 100%;
   background-color:var(--secundaryColor);
@@ -132,8 +105,8 @@
   aspect-ratio: 16 / 9;
 }
 
-.videoContainer video,
-.videoContainer canvas {
+.video-container video,
+.video-container canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -141,10 +114,24 @@
   height: 100%;
   z-index: 0;
   display: block;
-  
 }
 
-.videoContainer canvas {
+.video-container{
+  background-color: var(--secundaryColor);
+}
+
+.video-container canvas {
   background-color: rgba(0, 0, 0, 0);
   z-index: 1;
 }
+
+
+
+@media (max-width: 576px) {
+  .options-camera.dropdown{
+    left: 93%;
+  }
+
+}
+
+
