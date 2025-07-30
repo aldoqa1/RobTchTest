@@ -79,7 +79,7 @@ function CameraCard({ camera }) {
         Swal.fire({
 
             icon: "warning",
-            title: "Deseja apagar essa câmera",
+            title: "Deseja apagar essa câmera?",
             text: "Não será possível recuperar dados desta câmera",
             showCancelButton: true,
             confirmButtonColor: "#ce3b3bff",

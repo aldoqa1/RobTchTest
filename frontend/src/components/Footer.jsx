@@ -21,29 +21,46 @@ function Footer() {
     }
 
 
-    function deleteEPI(name){
+    function deleteEPI(id){
       let copyData = JSON.parse(JSON.stringify(data));
         copyData.epis = copyData.epis.filter((epi)=>{
-            if(name != epi){
+            if(id != epi.id){
                 return epi;
             }
         });
+
+        copyData.cameras = copyData.cameras.map((cam)=>{
+            
+            cam.epis = cam.epis.filter((c)=>{
+                if(c != id){
+                    return c;
+                }
+            })
+
+            return cam;
+        });
+
         //setting the new data into memory
         setData(copyData);
         //saving the object in local storage
         localStorage.setItem('data', JSON.stringify(copyData));         
     }
 
-    function activateUpdate(name){
-        setChoosenEPI(name);
-        setUpdateEPI(name);
+    function activateUpdate(epi){
+        setChoosenEPI(epi.id);
+        setUpdateEPI(epi.name);
     }
 
     function editEPI(){
+        
         let copyData = JSON.parse(JSON.stringify(data));
         copyData.epis = copyData.epis.map((epi)=>{
-            if(choosenEPI === epi){
-                epi = updateEPI;
+            if(choosenEPI === epi.id){
+                epi = 
+                {
+                    id: choosenEPI,
+                    name:updateEPI
+                };
             }
             return epi;
         });
@@ -61,7 +78,12 @@ function Footer() {
             alert("error", "Erro ao adicionar EPI", "O EPI está vazio");
         }else{
             let copyData = JSON.parse(JSON.stringify(data));
-            copyData.epis.push(newEPI);
+            
+            //it gets the last id epi
+            const lastEpi = copyData.epis.at(-1);
+            const lastId = lastEpi ? lastEpi.id : 0;
+            copyData.epis.push({id:lastId+1, name:newEPI});
+
             //setting the new data into memory
             setData(copyData);
             //saving the object in local storage
@@ -89,18 +111,18 @@ function Footer() {
                         
                         <Dropdown.Item  onClick={(e)=>e.stopPropagation()} className="fw-bold d-flex align-items-center"> <input type="input text" placeholder='' onChange={(e)=>{setNewEPI(e.target.value)}} value={newEPI} /> <div onClick={addEPI} className='ms-auto icon add'></div></Dropdown.Item>
 
-                        {data.epis && data.epis.map((epi, idx)=>{
+                        {data.epis && data.epis.map((epi)=>{
                             return (
-                            <Dropdown.Item key={idx+epi} onClick={(e)=>e.stopPropagation()} className=" d-flex align-items-center"> 
-                            {choosenEPI == epi ? <div className="d-flex w-100">
+                            <Dropdown.Item key={epi.id} onClick={(e)=>e.stopPropagation()} className=" d-flex align-items-center"> 
+                            {choosenEPI == epi.id ? <div className="d-flex w-100">
                                 <input type="input text" placeholder='' onChange={(e)=>{setUpdateEPI(e.target.value)}} value={updateEPI} /> <div onClick={editEPI} className='ms-auto icon edit'></div>                                 
                                 </div>   
                            
                             :
                                 <div className="d-flex w-100" >
-                                    <p className='me-2 text'>{epi}</p> 
+                                    <p className='me-2 text'>{epi.name}</p> 
                                     <div onClick={()=>{activateUpdate(epi)}} className='ms-auto icon edit'></div>
-                                    <div onClick={()=>{deleteEPI(epi)}} className="icon delete"></div>                                    
+                                    <div onClick={()=>{deleteEPI(epi.id)}} className="icon delete"></div>                                    
                                 </div> 
                                                          
                             }

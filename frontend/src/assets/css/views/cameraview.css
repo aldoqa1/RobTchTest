@@ -9,7 +9,7 @@
 .camera-view .video-container .cancel{
     position: absolute;
     bottom: -50px;
-    right: 80px;
+    right: 95px;
     color: var(--redColor);
     border-color: var(--redColor);
 }
@@ -131,4 +131,51 @@
 .camera-view .check{
     max-width: 800px;
     margin: 0 auto 0;
+}
+
+.camera-view .edit::after{
+    background-color: var(--greenColor);
+}
+
+
+.camera-view .restricts .area:hover{
+transform: scale(105%);
+
+}
+
+.camera-view .restricts .area{
+    display: inline-flex;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--whiteColor);
+    height: auto;
+    width: auto;
+    margin: 5px 10px;
+    margin-bottom: 15px;
+    transition: all 0.5s ease;
+}
+
+.camera-view .restricts .area .delete{
+    width: 20px;
+    height: 20px;
+}
+
+
+.camera-view .epis{
+    max-width: 800px;
+    margin: 10px auto;
+}
+
+.camera-view .epis .epi{
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--whiteColor);
+    display: inline-flex;
+    width: fit-content;
+}
+
+.camera-view .epis .checked{
+    color: var(--greenColor);
+    border-color: var(--greenColor);
 }
