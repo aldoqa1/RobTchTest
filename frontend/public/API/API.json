@@ -6,7 +6,7 @@
       "name": "Câmera 1",
       "url": "https://channel01-onlymex.akamaized.net/hls/live/2022749/event01/index.m3u8",
       "latitude": "031°23'12\"S",
-      "longitude": "123°12'31\"W",
+      "longitude": "036°12'31\"E",
       "areas": [],
       "pendingAlerts": false,
       "epis": [],
@@ -17,8 +17,8 @@
       "status": "offline",
       "name": "Câmera 2",
       "url": "https://azt-mun.otteravision.com/azt/mun/mun.m3u8",
-      "latitude": "031°23'12\"S",
-      "longitude": "123°12'31\"W",
+      "latitude": "019°23'12\"N",
+      "longitude": "099°12'31\"W",
       "areas": [],
       "pendingAlerts": false,
       "epis": [1],
@@ -29,8 +29,8 @@
       "status": "offline",
       "name": "Câmera 3",
       "url": "https://stream.fs1.tv/hls/webstream.m3u8",
-      "latitude": "031°23'12\"S",
-     "longitude": "123°12'31\"W",
+      "latitude": "048°23'12\"N",
+      "longitude": "002°12'31\"E",
       "areas": [],
       "pendingAlerts": false,
       "epis": [],
@@ -41,8 +41,8 @@
       "status": "offline",
       "name": "Câmera 4",
       "url": "https://amg02855-foxsports-amg02855c1-xumo-us-1755.playouts.now.amagi.tv/Fox-Sports-AmazonNews/playlist.m3u8",
-      "latitude": "031°23'12\"S",
-     "longitude": "123°12'31\"W",
+      "latitude": "52°23'12\"N",
+     "longitude": "004°12'31\"E",
       "areas": [],
       "pendingAlerts": false,
       "epis": [],
@@ -73,7 +73,8 @@
       "x": 44,
       "y": 27,
       "w": 29,
-      "h": 44
+      "h": 44,
+      "createdByCamId": 4
     }
   ]
 }

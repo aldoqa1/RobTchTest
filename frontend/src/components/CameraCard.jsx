@@ -100,7 +100,8 @@ function CameraCard({ camera }) {
                 }, 10000);
             }
 
-        }, Math.random() * 150000 + 30000);
+        }, Math.random() * 1500 + 15000);
+        // }, Math.random() * 150000 + 30000);
 
         //it clean the interval when the components is unmonted
         return function cleanComponent() {
@@ -212,7 +213,8 @@ function CameraCard({ camera }) {
             x: xInitialObject.current,
             y: yInitialObject.current,
             w: xWidthObject.current,
-            h: yWidthObject.current
+            h: yWidthObject.current,
+            createdByCamId: camera.id
         }
 
         //it updates the data

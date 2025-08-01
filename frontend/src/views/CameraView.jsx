@@ -10,7 +10,7 @@ import Hls from "hls.js";
 
 function CameraView() {
 
-    const { data, setData, choosenId, alert, setShowToast, currentView, saveData, getACopyOf } = useContext(GlobalContext);
+    const { data, choosenId, alert, setShowToast, currentView, saveData, getACopyOf } = useContext(GlobalContext);
 
     //choosenCamera
     let camera = {};
@@ -42,10 +42,14 @@ function CameraView() {
     const restrictRef = useRef("");
     const [showRestrictAreas, setShowRestrictAreas] = useState(false);
 
+
     //setting current camera
-    camera = data.cameras ? data.cameras.find(cam => cam.id === choosenId) : {};
-
-
+    if (currentView === "CameraView") {
+        camera = data.cameras ? data.cameras.find(cam => cam.id === choosenId) : {};
+    } else {
+        const alert = data.alerts ? data.alerts.find(a => a.id === choosenId) : {};
+        camera = data.cameras ? data.cameras.find(cam => cam.id === alert.createdByCamId) : {};
+    }
 
 
     //=============================== Create restrict area (start) ===================================//
@@ -192,7 +196,7 @@ function CameraView() {
 
         //it cleans the canvas 
         context.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         //it draws the stroke rect
         context.strokeRect(xInitial.current, yInitial.current, xWidth.current, yWidth.current);
 
@@ -218,7 +222,7 @@ function CameraView() {
 
             //cleaning the canvas
             context.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             //wawing the stroke rect
             context.strokeRect(xInitial.current, yInitial.current, xWidth.current, yWidth.current);
 
@@ -293,7 +297,8 @@ function CameraView() {
             x: xInitialObject.current,
             y: yInitialObject.current,
             w: xWidthObject.current,
-            h: yWidthObject.current
+            h: yWidthObject.current,
+            createdByCamId: camera.id
         }
 
         //it adds an alert the the alerts array
@@ -306,7 +311,7 @@ function CameraView() {
             }
             return cam;
         })
-        
+
         saveData(copyData);
 
         setShowToast(true);
@@ -316,7 +321,7 @@ function CameraView() {
     function setEPI(event, epiId) {
 
         let copyData = getACopyOf(data);
-        
+
         if (event.target.checked) {
 
             //it updates the cameras array (adding a epi to the list)
@@ -348,7 +353,7 @@ function CameraView() {
     function turningCamera(status) {
 
         let copyData = getACopyOf(data);
-    
+
         //it updates the array of acameras
         copyData.cameras = copyData.cameras.map(cam => {
             if (cam.id === camera.id) {
@@ -356,12 +361,26 @@ function CameraView() {
             }
             return cam;
         });
-        
+
         saveData(copyData);
     }
 
+
+
     //it sets and runs the interval
     useEffect(() => {
+
+        //it focus the alerts when it is opened from the alerts view
+        if (currentView !== "CameraView") {
+            const elementId = `alert${choosenId}`; 
+            const element = document.getElementById(elementId);
+
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth", block: "center" });
+                element.focus(); 
+            }
+        }
+
         //random interval between min 30 seg - 3 min
         const interval = setInterval(() => {
 
@@ -373,7 +392,7 @@ function CameraView() {
                 const h = canvasBox.height = container.clientHeight;
                 contextBox.lineWidth = 2;
                 contextBox.strokeStyle = "yellow";
-                
+
                 //it sets the border when a alert is created
                 const innerContainer = videoRef.current.parentElement;
                 innerContainer.classList.add("border-alert");
@@ -381,10 +400,10 @@ function CameraView() {
                 yInitialObject.current = Math.random() * 0.59 * h + 1;
                 xWidthObject.current = w * .15;
                 yWidthObject.current = h * .4;
-                
+
                 //it draws the bounding object
                 contextBox.strokeRect(xInitialObject.current, yInitialObject.current, xWidthObject.current, yWidthObject.current);
-                
+
                 //it creates the alert
                 createAlert();
 
@@ -655,7 +674,7 @@ function CameraView() {
 
 
                             return (
-                                <AlertCard key={foundAlert.id + "alertUnique" + camera.id} foundAlert={foundAlert} camera={camera} idx={idx} />
+                                <div id={"alert" + foundAlert.id} key={foundAlert.id + "alertUnique" + camera.id}><AlertCard foundAlert={foundAlert} camera={camera} idx={idx} /></div>
                             )
                         })
                             :

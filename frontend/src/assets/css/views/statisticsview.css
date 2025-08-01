@@ -1,0 +1,29 @@
+/*Statistics area*/
+.statistics .dropdowns{
+    z-index:                                                                                10000;
+}
+
+.statistics .indicative{
+    color:                                                                                  var(--yellowColor);
+}
+
+.statistics .date span{
+    font-size:                                                                              14px;
+    font-weight:                                                                            bold;
+    margin-top:                                                                             5px;
+}
+
+.statistics .date input{
+    cursor:                                                                                 pointer;
+    width:                                                                                  130px;
+    padding:                                                                                3px;
+    border-radius:                                                                          3px;
+    background-color:                                                                       rgb(63, 64, 64);
+    color:                                                                                  white;
+}
+
+/*It changes the icon color in the date*/
+.statistics .date input[type="date"]::-webkit-calendar-picker-indicator {
+  filter:                                                                                   invert(1);
+  cursor:                                                                                   pointer;
+}

@@ -20,7 +20,7 @@ function App() {
       {/* Main components and vies */}  
       <Header />
       {currentView === "DashboardView" && <DashboardView />}
-      {currentView === "CameraView" && <CameraView />}
+      {(currentView === "CameraView" || currentView === "CameraViewAlert") && <CameraView />}
       {currentView === "AlertsView" && <AlertsView />}
       {currentView === "StatisticsView" && <StatisticsView />}
       <Footer />

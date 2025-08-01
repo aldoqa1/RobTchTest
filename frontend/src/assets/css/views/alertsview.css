@@ -15,6 +15,56 @@
     width:                                                                              100%;
 }
 
+.alerts-view .dropdowns{
+    z-index:                                                                            10;
+    position:                                                                           relative;
+}
+
+.alerts-view .apply{
+    color:                                                                              var(--greenColor);
+    border:                                                                             2px solid var(--greenColor);
+    margin-bottom:                                                                      5px;
+    width:                                                                              100%;
+}
+
+.alerts-view .cancel{
+    color:                                                                              var(--redColor);
+    border:                                                                             2px solid var(--redColor);
+    padding:                                                                            6px 10px;
+    height:                                                                             fit-content;
+    width:                                                                              100%;
+}
+
+.alerts-view.open-filter{
+    background-color:                                                                   rgb(60, 60, 61);
+    margin-bottom:                                                                      5px;
+}
+
+.alerts-view .date span{
+    font-size:                                                                          14px;
+    font-weight:                                                                        bold;
+    margin-top:                                                                         5px;
+}
+
+.alerts-view .date input{
+    cursor:                                                                             pointer;
+    width:                                                                              130px;
+    padding:                                                                            3px;
+    border-radius:                                                                      3px;
+    background-color:                                                                   rgb(63, 64, 64);
+    color:                                                                              white;
+}
+
+/*it changes the icon color*/
+.alerts-view .date input[type="date"]::-webkit-calendar-picker-indicator {
+  filter:                                                                               invert(1); 
+  cursor:                                                                               pointer;
+}
+
+.alerts-view .outer{
+    cursor:                                                                             pointer;
+}
+
 @media (max-width: 576px) {
     .alerts-view .img-container {
         margin:                                                                         10px auto;

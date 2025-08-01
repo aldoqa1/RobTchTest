@@ -1,0 +1,87 @@
+/*Dropdown filter characteristics*/
+.dropdown-filter .dropdown {
+    padding:                                                                0;
+
+}
+
+.dropdown-filter button:hover,
+.dropdown-filter .button:hover {
+    transform:                                                              scale(100%) !important;
+    border:                                                                 0;
+}
+
+.dropdown-filter:hover {
+    transform:                                                              scale(100%) !important;
+    border:                                                                 0;
+}
+
+.dropdown-filter .dropdown-menu {
+    width:                                                                  auto !important;
+    min-width:                                                              100% !important;
+    max-height:                                                             250px;
+    overflow-y:                                                             auto;
+}
+
+.dropdown-filter.dropdown .vector {
+    width:                                                                  12px;
+    height:                                                                 12px;
+    margin-top:                                                             4px;
+}
+
+.dropdown-filter .dropdown-toggle,
+.dropdown-filter .dropdown-toggle:hover,
+.dropdown-filter.dropdown:focus,
+.dropdown-filter.dropdown:active {
+    padding:                                                                0px;
+    border-radius:                                                          3px;
+    transform:                                                              scale(100%) !important;
+    border:                                                                 0;
+}
+
+.dropdown-filter .dropdown-toggle,
+.dropdown-filter {
+    border:                                                                 1px solid var(--whiteColor) !important;
+    transform:                                                              scale(100%);
+    border-radius:                                                          4px;
+
+}
+
+.dropdown-filter.dropdown .vector::after {
+    mask-image:                                                             url("./../../images/vector.svg");
+    background-color:                                                       var(--whiteColor);
+    transform:                                                              rotateZ(90deg);
+}
+
+.dropdown-filter.dropdown .checked,
+.dropdown-filter.dropdown .unchecked {
+    display:                                                                flex;
+    align-items:                                                            center;
+    justify-content:                                                        space-between;
+    width: 100%;
+    background-color:                                                       rgb(228, 251, 228);
+    color: var(--greenColor);
+    font-weight: bold;
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+
+.dropdown-filter.dropdown .checked .icon,
+.dropdown-filter.dropdown .unchecked .icon {
+    margin-left:                                                            10px;
+}
+
+.dropdown-filter.dropdown .checked .icon::after,
+.dropdown-filter.dropdown .unchecked .icon::after {
+    background-color:                                                       var(--greenColor);
+    mask-image:                                                             url("./../../images/eyeon.svg");
+}
+
+
+.dropdown-filter.dropdown .unchecked {
+    color:                                                                  var(--redColor);
+}
+
+.dropdown-filter.dropdown .unchecked .icon::after {
+    mask-image:                                                             url("./../../images/eyeclose.svg");
+    background-color:                                                       var(--redColor);
+}

@@ -2,7 +2,6 @@ import { GlobalContext } from '../context/GlobalContext';
 import { useContext, useEffect } from 'react';
 import CameraCard from '../components/CameraCard';
 
-
 function DashboardView() {
 
     const { data, saveData } = useContext(GlobalContext);
@@ -45,7 +44,7 @@ function DashboardView() {
                 
 
 
-
+                        
 
 
 
