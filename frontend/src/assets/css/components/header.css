@@ -1,36 +1,36 @@
-header{
-    padding: 30px 0;
+/*hEADER ELEMENTS*/
+header {
+  padding:                                                                      30px 0;
 }
 
-header .icon.add::after{
-    background-color: var(--greenColor);
+header .icon.back {
+  width:                                                                        40px;
+  height:                                                                       40px;
+  margin-right:                                                                 20px;
 }
 
-header .icon.back{
-    width: 40px;
-    height: 40px;
-    margin-right: 20px;
+header .icon.add::after {
+  background-color:                                                             var(--greenColor);
 }
 
-header .icon.back::after{
-    mask-image: url("./../../images/back.svg");
-    background-color: var(--whiteColor);
+header .icon.back::after {
+  mask-image:                                                                   url("./../../images/back.svg");
+  background-color:                                                             var(--whiteColor);
 }
-
 
 @media (max-width: 576px) {
-  .add-container{
-    width: 100%;
-    display: flex;
-    margin-top: 20px;
+  header .add-container {
+    width:                                                                      100%;
+    display:                                                                    flex;
+    margin-top:                                                                 20px;
   }
 
-  .add-container button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    width: 100%;
+  header .add-container button {
+    display:                                                                    flex;
+    align-items:                                                                center;
+    justify-content:                                                            center;
+    margin-left:                                                                auto;
+    width:                                                                      100%;
   }
 
 }

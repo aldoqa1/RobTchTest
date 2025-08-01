@@ -4,9 +4,9 @@ function StatisticsView() {
 
     return (
 
-        <div className='alerts'>
+        <div className='statistics'>
 
-            <p>Statistics</p>
+            <p>Statisticas</p>
 
         </div>
 

@@ -1,136 +1,137 @@
+/*Camera card (in the dashboard)*/
 .camera-card {
-  position: relative;
-  flex-direction: column;
-  
+  position:                                                                           relative;
+  flex-direction:                                                                     column;
 }
 
-.camera-card .inner{
-  overflow-x: hidden;
-  position: relative;
-  flex-direction: column;
-  border-radius: 8px;
+/*Principal container*/
+.camera-card .inner {
+  overflow-x:                                                                         hidden;
+  position:                                                                           relative;
+  flex-direction:                                                                     column;
+  border-radius:                                                                      8px;
 }
 
-.camera-card .top, .camera-card .bottom {
-  position: absolute;
-  top: 0;
-  left: 1;
-  padding: 10px 10px;
-  display: flex;
-  width: 100%;
-  height: 60px;
+/*They are used to show the gradients*/
+.camera-card .top,
+.camera-card .bottom {
+  position:                                                                           absolute;
+  top:                                                                                0;
+  left:                                                                               1;
+  padding:                                                                            10px 10px;
+  display:                                                                            flex;
+  width:                                                                              100%;
+  height:                                                                             60px;
   z-index: 2;
-  justify-content: space-between;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  justify-content:                                                                    space-between;
+  background:                                                                         linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
-.camera-card .top span{
-  font-size: 12px;
-  font-weight: bold;
-  margin-top: 4px;
+.camera-card .top span {
+  font-size:                                                                          12px;
+  font-weight:                                                                        bold;
+  margin-top:                                                                         4px;
 }
 
-.camera-card .top .circle{
-  border-radius: 50%;
-  width: 7px;
-  height: 7px;
-  display: inline-flex;
+.camera-card .top .circle {
+  border-radius:                                                                      50%;
+  width:                                                                              7px;
+  height:                                                                             7px;
+  display:                                                                            inline-flex;
 }
 
-.camera-card .top.online .circle{
-  background-color: var(--greenColor);
+.camera-card .top.online .circle {
+  background-color:                                                                   var(--greenColor);
 }
 
-.camera-card .top.offline .circle{
-  background-color: var(--redColor);
+.camera-card .top.offline .circle {
+  background-color:                                                                   var(--redColor);
 }
 
-.camera-card .top.online span{
-  color: var(--greenColor);
+.camera-card .top.online span {
+  color:                                                                              var(--greenColor);
 }
 
-.camera-card .top.offline span{
-  color: var(--redColor);
+.camera-card .top.offline span {
+  color:                                                                              var(--redColor);
 }
 
-.camera-card .top.alerts .circle{
-  background-color: var(--yellowColor);
+.camera-card .top.alerts .circle {
+  background-color:                                                                   var(--yellowColor);
 }
 
-.camera-card .top.alerts span{
-  color: var(--yellowColor);
+.camera-card .top.alerts span {
+  color:                                                                              var(--yellowColor);
 }
 
-.camera-card .bottom{
-  display: flex;
-  justify-content: end;
-  align-items: end;
-  background: linear-gradient(to bottom,  rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-  top: calc(100% - 60px);
-  left: 0;
+.camera-card .bottom {
+  display:                                                                            flex;
+  justify-content:                                                                    end;
+  align-items:                                                                        end;
+  background:                                                                         linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  top:                                                                                calc(100% - 60px);
+  left:                                                                               0;
 }
 
-.camera-card .icon.settings{
-  z-index: 10;
+.camera-card .icon.settings {
+  z-index:                                                                            10;
 }
 
 /*Dropdown */
-.options-camera.dropdown{
-  position: relative !important;
-  top: 0;
-  left: 90%;
-  transform: translateY(-30px);
-  z-index: 100;
-  width: fit-content;
+.options-camera.dropdown {
+  position:                                                                           relative !important;
+  top:                                                                                0;
+  left:                                                                               90%;
+  transform:                                                                          translateY(-30px);
+  z-index:                                                                            100;
+  width:                                                                              fit-content;
 }
 
-
-.options-camera .icon.edit, .options-camera .icon.delete{
-  width: 18px;
-  height: 18px;
-  margin-left: 5PX;
+.options-camera .icon.edit,
+.options-camera .icon.delete {
+  width:                                                                              18px;
+  height:                                                                             18px;
+  margin-left:                                                                        5PX;
 }
 
-.camera-card .dropdown p{
-  color: var(--mainColor);
-  margin-bottom: 0;
+.camera-card .dropdown p {
+  color:                                                                              var(--mainColor);
+  margin-bottom:                                                                      0;
 }
 
 /*Video container*/
 .video-container {
-  position: relative;
-  width: 100%;
-  background-color:var(--secundaryColor);
-  max-width: 800px;
-  aspect-ratio: 16 / 9;
+  position:                                                                           relative;
+  width:                                                                              100%;
+  background-color:                                                                   var(--secundaryColor);
+  max-width:                                                                          800px;
+  aspect-ratio:                                                                       16 / 9;
 }
 
 .video-container video,
 .video-container canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  display: block;
+  position:                                                                           absolute;
+  top:                                                                                0;
+  left:                                                                               0;
+  width:                                                                              100%;
+  height:                                                                             100%;
+  z-index:                                                                            0;
+  display:                                                                            block;
 }
 
-.video-container{
-  background-color: var(--secundaryColor);
+.video-container {
+  background-color:                                                                   var(--secundaryColor);
 }
 
 .video-container canvas {
-  background-color: rgba(0, 0, 0, 0);
-  z-index: 1;
+  background-color:                                                                   rgba(0, 0, 0, 0);
+  z-index:                                                                            1;
 }
 
 
 @media (max-width: 576px) {
-  .options-camera.dropdown{
-    left: 93%;
+  /*Dropdown position adjust*/
+  .options-camera.dropdown {
+    left:                                                                             93%;
   }
-
 }
-
-

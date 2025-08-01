@@ -1,71 +1,72 @@
+/*Footer elements*/
 footer{
-    padding: 30px 0;
-    display: flex;
+    padding:                                                                                30px 0;
+    display:                                                                                flex;
 }
 
 footer button{
-    color: var(--whiteColor);
-    border-color: var(--whiteColor);
+    color:                                                                                  var(--whiteColor);
+    border-color:                                                                           var(--whiteColor);
 }
 
 footer .epis{
-    color: var(--yellowColor);
-    border-color: var(--yellowColor);
-    font-weight: bold;
-    border: 2px solid var(--yellowColor);
-    border-radius: 5px;
-    padding: 4px 10px;
+    color:                                                                                  var(--yellowColor);
+    border-color:                                                                           var(--yellowColor);
+    font-weight:                                                                            bold;
+    border:                                                                                 2px solid var(--yellowColor);
+    border-radius:                                                                          5px;
+    padding:                                                                                4px 10px;
 }
 
 footer .icon.vector{
-    width: 12px;
-    height: 12px;
-    margin-top: 3px;
+    width:                                                                                  12px;
+    height:                                                                                 12px;
+    margin-top:                                                                             3px;
 }
 
 footer .icon.vector::after{
-    mask-image: url("./../../images/vector.svg");
-    transform: rotateZ(-90deg);
-    background-color: var(--yellowColor);
+    mask-image:                                                                             url("./../../images/vector.svg");
+    transform:                                                                              rotateZ(-90deg);
+    background-color:                                                                       var(--yellowColor);
 }
 
 footer .icon.arrow::after{
-    mask-image: url("./../../images/arrow.svg");
-    background-color: var(--whiteColor);
+    mask-image:                                                                             url("./../../images/arrow.svg");
+    background-color:                                                                       var(--whiteColor);
 }
 
 footer .icon.edit::after{
-  background-color: var(--mainColor);
+  background-color:                                                                         var(--mainColor);
 }
 
 footer .icon.delete::after{
-  background-color: var(--redColor);
+  background-color:                                                                         var(--redColor);
 }
 
 footer .dropdown .text, footer .dropup .text{
-    color: var(--mainColor);
-    margin-bottom: 0;
+    color:                                                                                  var(--mainColor);
+    margin-bottom:                                                                          0;
 }
 
 footer input{
-    width: auto;
-    border: none;
-    font-weight: bold;
-    border-bottom: 1px solid var(--mainColor);
-    background-color: rgb(240, 239, 241);
-    padding: 2px;
-    margin-right: 5px;
-    border-radius: 4px 4px 0 0;
+    width:                                                                                  auto;
+    border:                                                                                 none;
+    font-weight:                                                                            bold;
+    border-bottom:                                                                          1px solid var(--mainColor);
+    background-color:                                                                       rgb(240, 239, 241);
+    padding:                                                                                2px;
+    margin-right:                                                                           5px;
+    border-radius:                                                                          4px 4px 0 0;
 }
 
 footer .author{
-    margin-top: 30px;
-    margin-bottom: 0;
-    font-size: 14PX;
-    color: var(--grayWeakColor);
+    margin-top:                                                                             30px;
+    margin-bottom:                                                                          0;
+    font-size:                                                                              14PX;
+    color:                                                                                  var(--grayWeakColor);
 }
 
 footer .author .link{
-    color: var(--yellowColor);
-    font-weight:bold;
+    color:                                                                                  var(--yellowColor);
+    font-weight:b                                                                           old;
 }

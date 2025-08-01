@@ -1,6 +1,6 @@
 import { Toast, ToastContainer } from 'react-bootstrap';
 import { GlobalContext } from '../context/GlobalContext';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 function ToastGeneral() {
 
@@ -13,7 +13,7 @@ function ToastGeneral() {
                     <strong className="me-auto">Notificação</strong>
                     <small>agora</small>
                 </Toast.Header>
-                <Toast.Body>Uma alerta foi criada</Toast.Body>
+                <Toast.Body>Uma alerta foi criada.</Toast.Body>
             </Toast>
         </ToastContainer>
     );

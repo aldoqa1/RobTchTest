@@ -1,241 +1,240 @@
-.camera-view .video-container{
-    border-radius: 10px;
-    margin: auto;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
+/*Camera view*/
+/*Camera view video container*/
+.camera-view .video-container {
+    border-radius:                                                          10px;
+    margin:                                                                 auto;
+    box-shadow:                                                             10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow:                                                     10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow:                                                        10px 10px 5px 0px rgba(0, 0, 0, 0.15);
 }
 
-.camera-view .video-container .cancel{
-    position: absolute;
-    bottom: -50px;
-    right: 95px;
-    color: var(--redColor);
-    border-color: var(--redColor);
-}
-.camera-view .video-container .save{
-    position: absolute;
-    bottom: -50px;
-    right: 0;
-    color: var(--greenColor);
-    border-color: var(--greenColor);
+/*Cancel button*/
+.camera-view .video-container .cancel {
+    position:                                                               absolute;
+    bottom:                                                                 -50px;
+    right:                                                                  95px;
+    color:                                                                  var(--redColor);
+    border-color:                                                           var(--redColor);
 }
 
-.camera-view .title{
-    max-width: 800px;
-    margin: 10px auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/*Save button*/
+.camera-view .video-container .save {
+    position:                                                               absolute;
+    bottom:                                                                 -50px;
+    right:                                                                  0;
+    color:                                                                  var(--greenColor);
+    border-color:                                                           var(--greenColor);
 }
 
-.camera-view .online, .camera-view .offline,.camera-view .alert{
-    padding: 10px;
-    border-radius: 10px;
+.camera-view .title {
+    max-width:                                                              800px;
+    margin:                                                                 10px auto;
+    display:                                                                flex;
+    align-items:                                                            center;
+    justify-content:                                                        space-between;
 }
 
-.camera-view .online{
-    color: var(--greenColor);
-    background-color: rgb(37, 54, 27);
-
+/*States*/
+.camera-view .online,
+.camera-view .offline,
+.camera-view .alert {
+    padding:                                                                10px;
+    border-radius:                                                          10px;
 }
 
-.camera-view .offline{
-    color: var(--redColor);
-    background-color: rgb(54, 31, 27);
-}
-
-.camera-view .alert{
-    color: var(--yellowColor);
-    background-color: rgb(37, 54, 27);
-}
-
-.camera-view .circle{
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--greenColor);
-    display: inline-block;
-}
-
-.camera-view .offline .circle{
-    background-color: var(--redColor);
-}
-
-.camera-view .alert .circle{
-    background-color: var(--yellowColor);
-}
-
-.camera-view .alerts{
-    max-width: 800px;
-    margin: 10px auto;
-}
-
-.camera-view .alert{
-    margin: 10px auto 0 0;
-    background-color: var(--secundaryColor);
-    width: auto;
-        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
-}
-
-.camera-view .alert{
-    position: relative;
-    overflow: hidden;
-}
-
-.camera-view .alert .img-container, .camera-view .alert .info{
-    z-index: 2;
-} 
-
-.camera-view .alert::after{
-    position: absolute;
-    mask-position: center;
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    background-color: rgb(52, 51, 51);
-    top: 0px;
-    right: -50px;
-    z-index:1;
-    width: min(80%, 300px);
-    height: 100%;
-    content: '';
-}
-
-.camera-view .invasion.alert::after{
- mask-image: url("./../../images/robber.svg");
-}
-
-.camera-view .EPI.alert::after{
- mask-image: url("./../../images/protection.svg");
-}
-
-.camera-view .alert h4{
-    color: var(--yellowColor);
-}
-.camera-view .img-container{
-    
-    height: 150px;
-    width: 40%;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.camera-view .img-container img{
-    width: 100%;
-}
-
-
-.camera-view .restricts{
-    max-width: 800px;
-    width: 100%;
-    margin: 30px auto;
-}
-
-.camera-view .restricts .add-area{
-    height: fit-content;
-    margin: auto 0;
-    display: flex;
-    align-items: center;
-    border-color: var(--greenColor);
-    color: var(--greenColor);
-    padding: 10px;
-    margin: auto 0 auto 0;
-    width: auto;
-    justify-content: center;
-    align-items: center;
-}
-
-.camera-view .restricts .name-area input{
-    height: fit-content;
-    background-color: transparent;
-    border-radius: 3px;
-    border: 1px solid var(--whiteColor);
-    padding: 4px;
-    color: var(--whiteColor);
-}
-
-
-.camera-view .restricts .name-area .check-name{
-    height: fit-content;
-}
-
-
-.camera-view .check{
-    max-width: 800px;
-    margin: 0 auto 0;
-}
-
-.camera-view .edit::after{
-    background-color: var(--greenColor);
-}
-
-
-.camera-view .restricts .area:hover{
-transform: scale(105%);
+.camera-view .online {
+    color:                                                                  var(--greenColor);
+    background-color:                                                       rgb(37, 54, 27);
 
 }
 
-.camera-view .restricts .area{
-    display: inline-flex;
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid var(--whiteColor);
-    height: auto;
-    width: auto;
-    margin: 0px 10px 0 5px;
-    margin-bottom: 15px;
-    transition: all 0.5s ease;
+.camera-view .offline {
+    color:                                                                  var(--redColor);
+    background-color:                                                       rgb(54, 31, 27);
 }
 
-.camera-view .restricts .area .delete{
-    width: 20px;
-    height: 20px;
+.camera-view .alert {
+    color:                                                                  var(--yellowColor);
+    background-color:                                                       rgb(37, 54, 27);
 }
 
-
-.camera-view .epis{
-    max-width: 800px;
-    margin: 10px auto;
+.camera-view .circle {
+    width:                                                                  10px;
+    height:                                                                 10px;
+    border-radius:                                                          50%;
+    background-color:                                                       var(--greenColor);
+    display:                                                                inline-block;
 }
 
-.camera-view .epis .epi{
-    background-color: transparent;
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid var(--whiteColor);
-    display: inline-flex;
-    width: fit-content;
+.camera-view .offline .circle {
+    background-color:                                                       var(--redColor);
 }
 
-.camera-view .epis .checked{
-    color: var(--greenColor);
-    border-color: var(--greenColor);
+.camera-view .alert .circle {
+    background-color:                                                       var(--yellowColor);
 }
 
+.camera-view .alerts {
+    max-width:                                                              800px;
+    margin:                                                                 10px auto;
+}
 
+.camera-view .alert {
+    margin:                                                                 10px auto 0 0;
+    background-color:                                                       var(--secundaryColor);
+    width:                                                                  auto;
+    box-shadow:                                                             10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow:                                                     10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow:                                                        10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.camera-view .alert {
+    position:                                                               relative;
+    overflow:                                                               hidden;
+}
+
+.camera-view .alert .img-container,
+.camera-view .alert .info {
+    z-index:                                                                2;
+}
+
+.camera-view .alert::after {
+    position:                                                               absolute;
+    mask-position:                                                          center;
+    mask-size:                                                              contain;
+    mask-repeat:                                                            no-repeat;
+    background-color:                                                       rgb(52, 51, 51);
+    top:                                                                    0px;
+    right:                                                                  -50px;
+    z-index:                                                                1;
+    width:                                                                  min(80%, 300px);
+    height:                                                                 100%;
+    content:                                                                '';
+}
+
+.camera-view .robber.alert::after {
+    mask-image:                                                             url("./../../images/robber.svg");
+}
+
+.camera-view .invasion.alert::after {
+    mask-image:                                                             url("./../../images/protection.svg");
+}
+
+.camera-view .alert h4 {
+    color:                                                                  var(--yellowColor);
+}
+
+.camera-view .img-container {
+    height:                                                                 150px;
+    width:                                                                  40%;
+    border-radius:                                                          5px;
+    overflow:                                                               hidden;
+}
+
+.camera-view .img-container img {
+    width:                                                                  100%;
+}
+
+/*Restrict area*/
+.camera-view .restricts {
+    max-width:                                                              800px;
+    width:                                                                  100%;
+    margin:                                                                 30px auto;
+}
+
+.camera-view .restricts .add-area {
+    height:                                                                 fit-content;
+    margin:                                                                 auto 0;
+    display:                                                                flex;
+    align-items:                                                            center;
+    border-color:                                                           var(--greenColor);
+    color:                                                                  var(--greenColor);
+    padding:                                                                10px;
+    margin:                                                                 auto 0 auto 0;
+    width:                                                                  auto;
+    justify-content:                                                        center;
+    align-items:                                                            center;
+}
+
+.camera-view .restricts .name-area input {
+    height:                                                                 fit-content;
+    background-color:                                                       transparent;
+    border-radius:                                                          3px;
+    border:                                                                 1px solid var(--whiteColor);
+    padding:                                                                4px;
+    color:                                                                  var(--whiteColor);
+}
+
+.camera-view .restricts .name-area .check-name {
+    height:                                                                 fit-content;
+}
+
+.camera-view .restricts .area:hover {
+    transform:                                                              scale(105%);
+}
+
+.camera-view .restricts .area {
+    display:                                                                inline-flex;
+    padding:                                                                10px;
+    border-radius:                                                          5px;
+    border:                                                                 2px solid var(--whiteColor);
+    height:                                                                 auto;
+    width:                                                                  auto;
+    margin:                                                                 0px 10px 0 5px;
+    margin-bottom:                                                          15px;
+    transition:                                                             all 0.5s ease;
+}
+
+.camera-view .restricts .area .delete {
+    width:                                                                  20px;
+    height:                                                                 20px;
+}
+
+/*Checkbox*/
+.camera-view .check {
+    max-width:                                                              800px;
+    margin:                                                                 0 auto 0;
+}
+
+.camera-view .edit::after {
+    background-color:                                                       var(--greenColor);
+}
+
+.camera-view .epis {
+    max-width:                                                              800px;
+    margin:                                                                 10px auto;
+}
+
+.camera-view .epis .epi {
+    background-color:                                                       transparent;
+    padding:                                                                10px;
+    border-radius:                                                          5px;
+    border:                                                                 2px solid var(--whiteColor);
+    display:                                                                inline-flex;
+    width:                                                                  fit-content;
+}
+
+.camera-view .epis .checked {
+    color:                                                                  var(--greenColor);
+    border-color:                                                           var(--greenColor);
+}
 
 @media (max-width: 576px) {
-.camera-view .img-container{
-    
-    margin: 10px auto;
-    width: 100%;
-    height: auto;
-    
-}
+    /*Checkbox*/
+    .camera-view .img-container {
+        margin:                                                             10px auto;
+        width:                                                              100%;
+        height:                                                             auto;
+    }
 
-.camera-view .img-container img{
-    
-    height: auto;
-    width: 100%;
-    
-}
+    .camera-view .img-container img {
+        height:                                                             auto;
+        width:                                                              100%;
+    }
 
-.camera-view .check{
-    width: 140px;
-    margin-left: 10px;
+    /*Checkbox*/
+    .camera-view .check {
+        width:                                                              140px;
+        margin-left:                                                        10px;
+    }
 }
-
-}
-

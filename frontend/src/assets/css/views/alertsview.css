@@ -1,0 +1,34 @@
+/*Alert view elements*/
+.alerts-view {
+    max-width:                                                                          800px;
+    margin:                                                                             10px auto;
+}
+
+.alerts-view .img-container {
+    height:                                                                             150px;
+    width:                                                                              40%;
+    border-radius:                                                                      5px;
+    overflow:                                                                           hidden;
+}
+
+.alerts-view img {
+    width:                                                                              100%;
+}
+
+@media (max-width: 576px) {
+    .alerts-view .img-container {
+        margin:                                                                         10px auto;
+        width:                                                                          100%;
+        height:                                                                         auto;
+    }
+
+    .alerts-view .img-container img {
+        height:                                                                         auto;
+        width:                                                                          100%;
+    }
+
+    .alerts-view.check {
+        width:                                                                          140px;
+        margin-left:                                                                    10px;
+    }
+}

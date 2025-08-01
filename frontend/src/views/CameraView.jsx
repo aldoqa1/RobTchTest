@@ -1,54 +1,52 @@
-import Hls from "hls.js";
+import "./../assets/css/views/cameraview.css";
 import { useRef, useEffect, useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
-import "./../assets/css/views/cameraview.css";
+import AlertCard from "../components/AlertCard";
 import Swal from "sweetalert2";
 import moment from "moment";
-import AlertCard from "../components/AlertCard";
+import Hls from "hls.js";
+
 
 
 function CameraView() {
 
-    const { data, setData, choosenId, alert, setShowToast, currentView } = useContext(GlobalContext);
+    const { data, setData, choosenId, alert, setShowToast, currentView, saveData, getACopyOf } = useContext(GlobalContext);
 
-    //camera
+    //choosenCamera
     let camera = {};
-    const videoRef = useRef();
+
+    //main variables
     const dataRef = useRef();
     const statusRef = useRef()
+    const videoRef = useRef();
+    const [updatedId, setUpdatedId] = useState("");
 
-    useEffect(() => {
-        dataRef.current = data;
-        statusRef.current = camera.status;
-    }, [data]);
-
-    useEffect(() => {
-        dataRef.current = data;
-    }, [currentView]);
-
-    //canvas
+    //canvas variables
     const canvasRef = useRef();
     const canvasBoxRef = useRef();
+
+    //drawing variables
     const xInitial = useRef(0);
     const xWidth = useRef(0);
     const yInitial = useRef(0);
     const yWidth = useRef(0);
     const isDrawing = useRef(false);
-
     const xInitialObject = useRef(0);
     const yInitialObject = useRef(0);
     const xWidthObject = useRef(0);
     const yWidthObject = useRef(0);
-    
+
     //restrict areas
     const [restrictStep, setRestrictStep] = useState("");
     const [restrictInput, setRestrictInput] = useState("");
     const restrictRef = useRef("");
-    const [updatedId, setUpdatedId] = useState("");
     const [showRestrictAreas, setShowRestrictAreas] = useState(false);
 
     //setting current camera
     camera = data.cameras ? data.cameras.find(cam => cam.id === choosenId) : {};
+
+
+
 
     //=============================== Create restrict area (start) ===================================//
 
@@ -81,7 +79,9 @@ function CameraView() {
             return;
         }
 
-        let copyData = JSON.parse(JSON.stringify(data));
+        let copyData = getACopyOf(data);
+
+        //it updates the cameras array by adding the restricted area
         copyData.cameras = copyData.cameras.map(cam => {
             if (cam.id === camera.id) {
 
@@ -101,10 +101,7 @@ function CameraView() {
             return cam;
         });
 
-        //setting the new data into memory
-        setData(copyData);
-        //saving the object in local storage
-        localStorage.setItem('data', JSON.stringify(copyData));
+        saveData(copyData);
 
         //it finally resets the canvas
         closeRestrict();
@@ -119,6 +116,7 @@ function CameraView() {
         } else {
             //it sets the area name
             restrictRef.current = restrictInput;
+            //it septs into the last area to save the area
             setRestrictStep("save");
         }
     }
@@ -126,8 +124,11 @@ function CameraView() {
     //=============================== Create restrict area (end) =====================================//
 
 
+
+
     //=============================== Delete restrict area (start) =====================================//
 
+    //it deletes a restrict area
     function deleteRestrictArea(area) {
         Swal.fire({
 
@@ -145,8 +146,9 @@ function CameraView() {
 
                 //Message
                 alert("success", "Área apagada", `A ${area.name} foi apagada com sucesso`);
-                let copyData = JSON.parse(JSON.stringify(data));
+                let copyData = getACopyOf(data);
 
+                //it updates the cameras array by removing the restricted area
                 copyData.cameras = copyData.cameras.map(cam => {
                     if (cam.id == choosenId) {
 
@@ -160,16 +162,16 @@ function CameraView() {
                     return cam;
                 });
 
-                //setting the new data into memory
-                setData(copyData);
-                //saving the object in local storage
-                localStorage.setItem('data', JSON.stringify(copyData));
+                saveData(copyData);
+
                 closeRestrict();
             }
         });
     }
 
     //=============================== Delete restrict area (end) =====================================//
+
+
 
 
 
@@ -187,7 +189,11 @@ function CameraView() {
         yWidth.current = area.ywidth;
         xInitial.current = area.xinitial;
         yInitial.current = area.yinitial;
+
+        //it cleans the canvas 
         context.clearRect(0, 0, canvas.width, canvas.height);
+        
+        //it draws the stroke rect
         context.strokeRect(xInitial.current, yInitial.current, xWidth.current, yWidth.current);
 
         //Setting text style
@@ -209,7 +215,11 @@ function CameraView() {
             setRestrictStep("update");
             const canvas = canvasRef.current;
             const context = canvas.getContext("2d");
+
+            //cleaning the canvas
             context.clearRect(0, 0, canvas.width, canvas.height);
+            
+            //wawing the stroke rect
             context.strokeRect(xInitial.current, yInitial.current, xWidth.current, yWidth.current);
 
             //Setting the area title
@@ -234,8 +244,9 @@ function CameraView() {
             ywidth: yWidth.current
         }
 
-        let copyData = JSON.parse(JSON.stringify(data));
+        let copyData = getACopyOf(data);
 
+        //it updates the cameras array by updating the restricted area
         copyData.cameras = copyData.cameras.map(cam => {
             if (cam.id == choosenId) {
 
@@ -249,10 +260,7 @@ function CameraView() {
             return cam;
         });
 
-        //setting the new data into memory
-        setData(copyData);
-        //saving the object in local storage
-        localStorage.setItem('data', JSON.stringify(copyData));
+        saveData(copyData);
 
         //it finally resets the canvas
         closeRestrict();
@@ -262,23 +270,142 @@ function CameraView() {
     //=============================== Update restrict area (end) =====================================//
 
 
-    //it sets the camera online/offline/alert || camera
+    //it creates an alert
+    function createAlert() {
+
+        const types = ["EPI", "invasion"];
+        let copyData = getACopyOf(dataRef.current);
+
+        //it gets the last alert id
+        const lastAlert = copyData.alerts.at(-1);
+        const lastId = lastAlert ? lastAlert.id : 0;
+
+        // time and date format
+        const date = moment().format('DD/MM/YYYY');
+        const time = moment().format('HH:mm:ss');
+
+        const alert = {
+            id: lastId + 1,
+            date: date,
+            time: time,
+            type: types[Math.round(Math.random())],
+            img: `./alerts/cam${Math.ceil(Math.random() * 20)}.jpg`,
+            x: xInitialObject.current,
+            y: yInitialObject.current,
+            w: xWidthObject.current,
+            h: yWidthObject.current
+        }
+
+        //it adds an alert the the alerts array
+        copyData.alerts = [...copyData.alerts, alert];
+
+        //it updates the cameras array
+        copyData.cameras = copyData.cameras.map((cam) => {
+            if (cam.id == camera.id) {
+                cam.alerts = [...cam.alerts, alert.id];
+            }
+            return cam;
+        })
+        
+        saveData(copyData);
+
+        setShowToast(true);
+    }
+
+    //it sets the epi to the epis of the camera
+    function setEPI(event, epiId) {
+
+        let copyData = getACopyOf(data);
+        
+        if (event.target.checked) {
+
+            //it updates the cameras array (adding a epi to the list)
+            copyData.cameras = copyData.cameras.map(cam => {
+                if (cam.id == camera.id) {
+                    cam.epis = [...cam.epis, epiId];
+                }
+                return cam;
+            });
+
+        } else {
+
+            //it updates the cameras array (removing a epi to the list)
+            copyData.cameras = copyData.cameras.map(cam => {
+                if (cam.id == camera.id) {
+
+                    cam.epis = cam.epis.filter((c) => c != epiId);
+
+                }
+                return cam;
+            });
+
+        }
+
+        saveData(copyData);
+    }
+
+    //it sets the camera online/offline/alert
     function turningCamera(status) {
 
-        let copyData = JSON.parse(JSON.stringify(data));
+        let copyData = getACopyOf(data);
+    
+        //it updates the array of acameras
         copyData.cameras = copyData.cameras.map(cam => {
             if (cam.id === camera.id) {
                 cam.status = status;
             }
             return cam;
         });
-        //setting the new data into memory
-        setData(copyData);
-        //saving the object in local storage
-        localStorage.setItem('data', JSON.stringify(copyData));
-
+        
+        saveData(copyData);
     }
 
+    //it sets and runs the interval
+    useEffect(() => {
+        //random interval between min 30 seg - 3 min
+        const interval = setInterval(() => {
+
+            if (statusRef.current == "online") {
+                const canvasBox = canvasBoxRef.current;
+                const contextBox = canvasBox.getContext("2d");
+                const container = canvasBox.parentElement;
+                const w = canvasBox.width = container.clientWidth;
+                const h = canvasBox.height = container.clientHeight;
+                contextBox.lineWidth = 2;
+                contextBox.strokeStyle = "yellow";
+                
+                //it sets the border when a alert is created
+                const innerContainer = videoRef.current.parentElement;
+                innerContainer.classList.add("border-alert");
+                xInitialObject.current = Math.random() * 0.84 * w + 1;
+                yInitialObject.current = Math.random() * 0.59 * h + 1;
+                xWidthObject.current = w * .15;
+                yWidthObject.current = h * .4;
+                
+                //it draws the bounding object
+                contextBox.strokeRect(xInitialObject.current, yInitialObject.current, xWidthObject.current, yWidthObject.current);
+                
+                //it creates the alert
+                createAlert();
+
+                //it delays the clean of the canvas and finally removes the border 
+                setTimeout(() => {
+                    contextBox.clearRect(0, 0, canvasBox.width, canvasBox.height);
+                    innerContainer.classList.remove("border-alert");
+                }, 10000);
+            }
+
+        }, Math.random() * 150000 + 30000);
+
+        //it cleans the component (removing the events in memory)
+        return function cleanComponent() {
+            clearInterval(interval);
+        }
+
+
+    }, []);
+
+    //when the status of the camera changes, this one tries to set the video in the case this one it's not online
     useEffect(() => {
 
         const src = camera.url;
@@ -299,42 +426,44 @@ function CameraView() {
         canvas.addEventListener("mouseleave", handleMouseLeave);
 
 
-        //it turns the camera onlien by default
+        let hls = null;
+        let handlePlaying = null;
 
         if (Hls.isSupported()) {
-            const hls = new Hls();
+            hls = new Hls();
             hls.loadSource(src);
             hls.attachMedia(video);
 
 
-            //when it starts it turns the video online
-            function handlePlaying() {
+            //when it detects its playing the video, it turns on the state
+            handlePlaying = () => {
                 turningCamera("online");
             };
 
-            // It plays automatically the video
-            function handlePause() {
-                if (video.paused) {
-                    video.play().catch(err => {
-                        turningCamera("offline");
-                    });
-                }
-            };
-
-            video.addEventListener("pause", handlePause);
             video.addEventListener("playing", handlePlaying);
-
-            //This function clean the component by destroying the hls and deattaching the event listener (to free memory)
-            return function cleanComponent() {
-                hls.destroy();
-                video.removeEventListener("pause", handlePause);
-                video.removeEventListener("playing", handlePlaying);
-
-            };
 
         } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
             video.src = src;
             video.play();
+        }
+
+        //it cleans the component (removing the events in memory)
+        return function cleanComponent() {
+            canvas.removeEventListener("mousedown", handleMouseDown);
+            canvas.removeEventListener("mouseup", handleMouseUp);
+            canvas.removeEventListener("mousemove", handleMouseMove);
+            canvas.removeEventListener("mouseleave", handleMouseLeave);
+
+            if (hls) {
+                hls.destroy();
+            }
+
+            if (handlePlaying) {
+                video.removeEventListener("playing", handlePlaying);
+            }
+
+
+
         }
 
         //it sets true the drawing state when clicking
@@ -344,92 +473,44 @@ function CameraView() {
             xInitial.current = event.offsetX;
         }
 
-        //it close the drawing state when pressing up
+        //it closes the drawing state when pressing up
         function handleMouseUp() {
             isDrawing.current = false;
         }
 
-        //it close the drawing state when leaving
+        //it closes the drawing state when leaving
         function handleMouseLeave() {
             isDrawing.current = false;
         }
 
         //It draws the restricted area
         function handleMouseMove(event) {
+
+            //it jsut draws if you are drawing
             if (!isDrawing.current) { return; }
 
+            //it cleans the canvas
             context.clearRect(0, 0, canvas.width, canvas.height);
 
             xWidth.current = event.offsetX - xInitial.current;
             yWidth.current = event.offsetY - yInitial.current;
 
+            //it draws the the stroke react as moving the mouse
             context.strokeRect(xInitial.current, yInitial.current, xWidth.current, yWidth.current);
+
             // text style
             context.font = "18px Arial";
             context.fillStyle = "white";
             context.textAlign = "center";
             context.textBaseline = "top";
 
-
-
             //Setting the area title
             context.fillText(restrictRef.current, (event.offsetX + xInitial.current) / 2, yInitial.current < event.offsetY ? yInitial.current + 10 : event.offsetY + 10);
         }
 
-
-
-
-        //it cleans the component (removing the events in memory)
-        return function cleanComponent() {
-            canvas.removeEventListener("mousedown", handleMouseDown);
-            canvas.removeEventListener("mouseup", handleMouseUp);
-            canvas.removeEventListener("mousemove", handleMouseMove);
-            canvas.removeEventListener("mouseleave", handleMouseLeave);
-        }
-
     }, [camera.status]);
 
-    useEffect(() => {
-        //random interval between min 3 min - 6 min
-        const interval = setInterval(() => {
-
-            if (statusRef.current == "online") {
-                const canvasBox = canvasBoxRef.current;
-                const contextBox = canvasBox.getContext("2d");
-                const container = canvasBox.parentElement;
-                const w = canvasBox.width = container.clientWidth;
-                const h = canvasBox.height = container.clientHeight;
-                contextBox.lineWidth = 2;
-                contextBox.strokeStyle = "yellow";
-
-                const innerContainer = videoRef.current.parentElement;
-                innerContainer.classList.add("border-alert");                
-                xInitialObject.current= Math.random() * 0.84 * w + 1;
-                yInitialObject.current= Math.random() * 0.59 * h + 1;
-                xWidthObject.current= w * .15;
-                yWidthObject.current= h * .4;
-                createAlert();
-                contextBox.strokeRect(xInitialObject.current, yInitialObject.current, xWidthObject.current, yWidthObject.current);
-                
-                setTimeout(() => {
-                    contextBox.clearRect(0, 0, canvasBox.width, canvasBox.height);
-                    innerContainer.classList.remove("border-alert");
-                }, 10000);
-
-
-            }
-
-        }, Math.random() * 18000 + 2000);
-
-        //it cleans the component (removing the events in memory)
-        return function cleanComponent() {
-            clearInterval(interval);
-        }
-
-
-    }, []);
-
-
+    //when showRestricAreas changes by using an loop it will print the restricted areas
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext("2d");
@@ -448,84 +529,18 @@ function CameraView() {
         }
     }, [showRestrictAreas]);
 
+    //when the data variable is updating data and status ref get the current value 
+    useEffect(() => {
+        dataRef.current = data;
+        statusRef.current = camera.status;
+    }, [data]);
+
+    //when curentview changes the dataRef variable gets the current value
+    useEffect(() => {
+        dataRef.current = data;
+    }, [currentView]);
 
 
-    function createAlert() {
-
-        const types = ["EPI", "invasion"];
-        let copyData = JSON.parse(JSON.stringify(dataRef.current));
-
-        //it gets the last id epi
-        const lastAlert = copyData.alerts.at(-1);
-        const lastId = lastAlert ? lastAlert.id : 0;
-
-        // date format "DD/MM/YYYY"
-        const date = moment().format('DD/MM/YYYY');
-
-        // time format "HH:mm:ss"
-        const time = moment().format('HH:mm:ss');
-
-        const alert = {
-            id: lastId + 1,
-            date: date,
-            time: time,
-            type: types[Math.round(Math.random())],
-            img: `./alerts/cam${Math.ceil(Math.random() * 20)}.jpg`,
-            x: xInitialObject.current,
-            y: yInitialObject.current,
-            w: xWidthObject.current,
-            h: yWidthObject.current
-        }
-
-        copyData.alerts = [...copyData.alerts, alert];
-        copyData.cameras = copyData.cameras.map((cam) => {
-            if (cam.id == camera.id) {
-                cam.alerts = [...cam.alerts, alert.id];
-            }
-            return cam;
-        })
-        //setting the new data into memory
-        setData(copyData);
-        //saving the object in local storage
-        localStorage.setItem('data', JSON.stringify(copyData));
-
-        setShowToast(true);
-    }
-
-
-
-    function setEPI(event, epiId) {
-
-        let copyData = JSON.parse(JSON.stringify(data));
-
-        if (event.target.checked) {
-
-            copyData.cameras = copyData.cameras.map(cam => {
-                if (cam.id == camera.id) {
-                    cam.epis = [...cam.epis, epiId];
-                }
-                return cam;
-            });
-
-        } else {
-
-            copyData.cameras = copyData.cameras.map(cam => {
-                if (cam.id == camera.id) {
-
-                    cam.epis = cam.epis.filter((c) => c != epiId);
-
-                }
-                return cam;
-            });
-
-        }
-
-        //setting the new data into memory
-        setData(copyData);
-        //saving the object in local storage
-        localStorage.setItem('data', JSON.stringify(copyData));
-
-    }
 
     return (
 
@@ -587,7 +602,7 @@ function CameraView() {
                             </div>
                         }
 
-                        {(restrictStep === "save" || restrictStep === "update") && <span className="my-auto">Desenha tu área en el video!</span>}
+                        {(restrictStep === "save" || restrictStep === "update") && <span className="my-auto">Desenhe sua área no vídeo!</span>}
 
                     </div>
 
@@ -640,7 +655,7 @@ function CameraView() {
 
 
                             return (
-                                <AlertCard foundAlert={foundAlert} camera={camera} idx={idx} />
+                                <AlertCard key={foundAlert.id + "alertUnique" + camera.id} foundAlert={foundAlert} camera={camera} idx={idx} />
                             )
                         })
                             :

@@ -5,14 +5,11 @@ import { GlobalContext } from "../context/GlobalContext";
 
 function ModalGeneral() {
 
-    const { showModal, setShowModal, typeModal, alert, data, setData, choosenId } = useContext(GlobalContext);
-
-    function handleClose() {
-        setShowModal(false);
-    }
+    const { showModal, setShowModal, typeModal, alert, data, setData, choosenId, getACopyOf, saveData } = useContext(GlobalContext);
 
 
-
+    
+    //when the modal changes and it's equal to update camera it searches for the camera 
     useEffect(()=>{
 
         if(typeModal === "updateCamera"){
@@ -21,11 +18,19 @@ function ModalGeneral() {
 
     }, [showModal]);
 
+    //it closes the modal
+    function handleClose() {
+        setShowModal(false);
+    }
+
+
+
 
     //============================== NEW CAMERA (start) ===========================//
 
     const [cameraNew, setCameraNew] = useState({ name: "", url: "", latitude: "", longitude: "" });
 
+    //it cleans the camera new inputs
     function cleanCameraNew(){
         setCameraNew({ name: "", url: "", latitude: "", longitude: "" });
     }
@@ -42,6 +47,7 @@ function ModalGeneral() {
 
     //it creates a new camera
     function createCamera() {
+
         //it gets the last id camera
         const lastCamera = data.cameras.at(-1);
         const lastId = lastCamera ? lastCamera.id : 0;
@@ -61,12 +67,12 @@ function ModalGeneral() {
 
         alert("success", "Câmera criada", "A câmera foi criada com sucesso");
 
-        let copyData = JSON.parse(JSON.stringify(data));
+        let copyData = getACopyOf(data);
+
+        //it adds a camera the cameras array
         copyData.cameras.push(camera);
-        //setting the new data into memory
-        setData(copyData);
-        //saving the object in local storage
-        localStorage.setItem('data', JSON.stringify(copyData));
+       
+        saveData(copyData);
 
         cleanCameraNew();
         setShowModal(false);
@@ -154,6 +160,7 @@ function ModalGeneral() {
 
     const [cameraUpdate, setCameraUpdate] = useState({ name: "", url: "", latitude: "", longitude: "" });
 
+    //it cleans the camera update inputs
     function cleanCameraUpdate(){
         setCameraUpdate({ name: "", url: "", latitude: "", longitude: "" });
     }
@@ -171,8 +178,9 @@ function ModalGeneral() {
     //it updates a camera
     function updateCamera() {
 
-        let copyData = JSON.parse(JSON.stringify(data));
+        let copyData = getACopyOf(data);
 
+        //it updates the cameras array
         copyData.cameras = copyData.cameras.map((cam)=>{
             if(cam.id == choosenId){
                 cam = cameraUpdate;
@@ -181,10 +189,7 @@ function ModalGeneral() {
             return cam;
         })
 
-        //setting the new data into memory
-        setData(copyData);
-        //saving the object in local storage
-        localStorage.setItem('data', JSON.stringify(copyData));
+        saveData(copyData);
 
         cleanCameraUpdate();
         setShowModal(false);
@@ -329,8 +334,8 @@ function ModalGeneral() {
 
                         <h2>Atualizar câmera</h2>
 
-                        <div className="d-flex mt-3 flex-column ">
-                            <label>Nome</label>
+                        <div className="d-flex mt-3 flex-column "> 
+                            <label>Nome:</label>
                             <input
                                 type="text"
                                 placeholder='Nome da câmera'
@@ -341,7 +346,7 @@ function ModalGeneral() {
                         </div>
 
                         <div className="d-flex mt-3 flex-column ">
-                            <label>Url</label>
+                            <label>Url:</label>
                             <input
                                 type="text"
                                 placeholder='Link da câmera'
@@ -354,7 +359,7 @@ function ModalGeneral() {
                         <div className="d-flex mt-3 flex-column flex-sm-row">
 
                             <div className="me-0 me-sm-3">
-                                <label>Latitude</label>
+                                <label>Latitude:</label>
                                 <input
                                     type="text"
                                     placeholder='Latitude da câmera'
@@ -365,7 +370,7 @@ function ModalGeneral() {
                             </div>
 
                             <div className="mt-3 mt-sm-0">
-                                <label>Longitude</label>
+                                <label>Longitude:</label>
                                 <input
                                     type="text"
                                     placeholder='Longitude da câmera'

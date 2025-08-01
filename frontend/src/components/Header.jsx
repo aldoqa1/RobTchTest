@@ -6,22 +6,23 @@ function Header() {
 
     const {setLastView, setCurrentView, lastView, setShowModal, setTypeModal, currentView} = useContext(GlobalContext);
 
+    //It renders the dashaboard
     function goHome(){
         setLastView(currentView);
         setCurrentView("DashboardView");
     }
 
+    //it opens the modal to add a camera
     function addCamera(){
         setShowModal(true);
         setTypeModal("newCamera");
     }
 
+    //it goes back to the last view
     function goBack(){
         setLastView(currentView);
         setCurrentView(lastView);
     }
-
-    
 
     return (
 

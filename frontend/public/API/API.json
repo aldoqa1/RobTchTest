@@ -46,7 +46,7 @@
       "areas": [],
       "pendingAlerts": false,
       "epis": [],
-      "alerts": []
+      "alerts": [1]
     }
   ],
   "epis": [
