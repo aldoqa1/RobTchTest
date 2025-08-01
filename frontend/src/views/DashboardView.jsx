@@ -3,6 +3,7 @@ import './../assets/css/views/dashboardview.css';
 import CameraCard from '../components/CameraCard';
 import { GlobalContext } from '../context/GlobalContext';
 
+
 function DashboardView() {
 
 
@@ -19,7 +20,7 @@ function DashboardView() {
 
             });
         }
-        ).catch(err => { console.log(err) });
+        ).catch(err => { setData({})});
     }
 
     //It gets all the data for the first time and it avoids if there is already data
@@ -49,6 +50,7 @@ function DashboardView() {
             </div>
                 
             <div onClick={()=>{console.log(data)}}>ver valor</div>
+            <div onClick={()=>{                localStorage.setItem('data', JSON.stringify(null)); window.location.reload();}}>REINICIAR</div>
 
         </div>
 

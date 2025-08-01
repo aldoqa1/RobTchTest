@@ -49,11 +49,17 @@ function ModalGeneral() {
         const camera = {
             id: lastId+1,
             name: cameraNew.name,
-            status: 'online',
+            status: 'offline',
             longitude: cameraNew.longitude,
             latitude: cameraNew.latitude,
-            url: cameraNew.url
+            url: cameraNew.url,
+            epis: [],
+            alerts: [],
+            pendingAlerts: false,
+            areas: []
         }
+
+        alert("success", "Câmera criada", "A câmera foi criada com sucesso");
 
         let copyData = JSON.parse(JSON.stringify(data));
         copyData.cameras.push(camera);
@@ -255,47 +261,47 @@ function ModalGeneral() {
 
                         <h2>Adicionar câmera</h2>
 
-                        <div>
-                            <label>Nome</label>
-                            <input
+                        <div className="d-flex flex-column  ">
+                            <label className="adjust">Nome:</label>
+                            <input 
                                 type="text"
                                 placeholder='Nome da câmera'
-                                className='input'
+                                className='input w-100'
                                 value={cameraNew.name}
                                 onChange={e => setCameraNew(prev => ({ ...prev, name: e.target.value }))}
                             />
                         </div>
 
-                        <div>
-                            <label>Url</label>
+                        <div className="d-flex mt-3 flex-column ">
+                            <label className="adjust">Url:</label>
                             <input
                                 type="text"
                                 placeholder='Link da câmera'
-                                className='input'
+                                className='input w-100'
                                 value={cameraNew.url}
                                 onChange={e => setCameraNew(prev => ({ ...prev, url: e.target.value }))}
                             />
                         </div>
 
-                        <div>
+                        <div className="d-flex mt-3 flex-column flex-sm-row"> 
 
-                            <div>
-                                <label>Latitude</label>
+                            <div className="me-0 me-sm-3">
+                                <label>Latitude:</label>
                                 <input
                                     type="text"
                                     placeholder='Latitude da câmera'
-                                    className='input'
+                                    className='input w-100'
                                     value={cameraNew.latitude}
                                     onChange={e => handleCoordsNew(e, "latitude")}
                                 />
                             </div>
 
-                            <div>
-                                <label>Longitude</label>
+                            <div className="mt-3 mt-sm-0">
+                                <label>Longitude:</label>
                                 <input
                                     type="text"
                                     placeholder='Longitude da câmera'
-                                    className='input'
+                                    className='input w-100'
                                     value={cameraNew.longitude}
                                     onChange={e => handleCoordsNew(e, "longitude")}
                                 />
@@ -303,9 +309,9 @@ function ModalGeneral() {
 
                         </div>
 
-                        <div>
-                            <div className="button" onClick={handleClose}>Voltar</div>
-                            <button onClick={(e) => { e.stopPropagation(); }}>Adicionar</button>
+                        <div className="d-flex w-100 align-items-center mt-4 justify-content-between">
+                            <div className="button close d-flex align-items-center" onClick={handleClose}><div className="icon me-1 back d-inline-flex"></div>Voltar</div>
+                            <button className="add d-flex align-items-center" onClick={(e) => { e.stopPropagation(); }}>Adicionar <div className="icon ms-1 add d-inline-flex"></div></button>
 
                         </div>
                     </form>
@@ -323,47 +329,47 @@ function ModalGeneral() {
 
                         <h2>Atualizar câmera</h2>
 
-                        <div>
+                        <div className="d-flex mt-3 flex-column ">
                             <label>Nome</label>
                             <input
                                 type="text"
                                 placeholder='Nome da câmera'
-                                className='input'
+                                className='input w-100'
                                 value={cameraUpdate.name}
                                 onChange={e => setCameraUpdate(prev => ({ ...prev, name: e.target.value }))}
                             />
                         </div>
 
-                        <div>
+                        <div className="d-flex mt-3 flex-column ">
                             <label>Url</label>
                             <input
                                 type="text"
                                 placeholder='Link da câmera'
-                                className='input'
+                                className='input w-100'
                                 value={cameraUpdate.url}
                                 onChange={e => setCameraUpdate(prev => ({ ...prev, url: e.target.value }))}
                             />
                         </div>
 
-                        <div>
+                        <div className="d-flex mt-3 flex-column flex-sm-row">
 
-                            <div>
+                            <div className="me-0 me-sm-3">
                                 <label>Latitude</label>
                                 <input
                                     type="text"
                                     placeholder='Latitude da câmera'
-                                    className='input'
+                                    className='input w-100'
                                     value={cameraUpdate.latitude}
                                     onChange={e => handleCoordsUpdate(e, "latitude")}
                                 />
                             </div>
 
-                            <div>
+                            <div className="mt-3 mt-sm-0">
                                 <label>Longitude</label>
                                 <input
                                     type="text"
                                     placeholder='Longitude da câmera'
-                                    className='input'
+                                    className='input w-100'
                                     value={cameraUpdate.longitude}
                                     onChange={e => handleCoordsUpdate(e, "longitude")}
                                 />
@@ -371,9 +377,9 @@ function ModalGeneral() {
 
                         </div>
 
-                        <div>
-                            <div className="button" onClick={handleClose}>Voltar</div>
-                            <button onClick={(e) => { e.stopPropagation(); }}>Atualizar</button>
+                        <div className="d-flex w-100 align-items-center mt-4 justify-content-between">
+                            <div className="button close d-flex align-items-center" onClick={handleClose}><div className="icon me-1 back d-inline-flex"></div>Voltar</div>
+                            <button className="add d-flex align-items-center" onClick={(e) => { e.stopPropagation(); }}>Atualizar <div className="icon ms-1 add d-inline-flex"></div></button>
 
                         </div>
                     </form>

@@ -80,6 +80,37 @@
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.15);
 }
 
+.camera-view .alert{
+    position: relative;
+    overflow: hidden;
+}
+
+.camera-view .alert .img-container, .camera-view .alert .info{
+    z-index: 2;
+} 
+
+.camera-view .alert::after{
+    position: absolute;
+    mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: rgb(52, 51, 51);
+    top: 0px;
+    right: -50px;
+    z-index:1;
+    width: min(80%, 300px);
+    height: 100%;
+    content: '';
+}
+
+.camera-view .invasion.alert::after{
+ mask-image: url("./../../images/robber.svg");
+}
+
+.camera-view .EPI.alert::after{
+ mask-image: url("./../../images/protection.svg");
+}
+
 .camera-view .alert h4{
     color: var(--yellowColor);
 }
@@ -110,7 +141,10 @@
     border-color: var(--greenColor);
     color: var(--greenColor);
     padding: 10px;
-    margin: auto 0;
+    margin: auto 0 auto 0;
+    width: auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .camera-view .restricts .name-area input{
@@ -150,7 +184,7 @@ transform: scale(105%);
     border: 2px solid var(--whiteColor);
     height: auto;
     width: auto;
-    margin: 5px 10px;
+    margin: 0px 10px 0 5px;
     margin-bottom: 15px;
     transition: all 0.5s ease;
 }
@@ -179,3 +213,29 @@ transform: scale(105%);
     color: var(--greenColor);
     border-color: var(--greenColor);
 }
+
+
+
+@media (max-width: 576px) {
+.camera-view .img-container{
+    
+    margin: 10px auto;
+    width: 100%;
+    height: auto;
+    
+}
+
+.camera-view .img-container img{
+    
+    height: auto;
+    width: 100%;
+    
+}
+
+.camera-view .check{
+    width: 140px;
+    margin-left: 10px;
+}
+
+}
+

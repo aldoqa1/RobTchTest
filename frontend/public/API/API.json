@@ -2,47 +2,51 @@
   "cameras": [
     {
       "id": 1,
-      "status": "online",
+      "status": "offline",
       "name": "Câmera 1",
       "url": "https://channel01-onlymex.akamaized.net/hls/live/2022749/event01/index.m3u8",
-      "altitude": 23,
-      "longitude": 100,
+      "latitude": "031°23'12\"S",
+      "longitude": "123°12'31\"W",
       "areas": [],
       "pendingAlerts": false,
-      "epis": []
+      "epis": [],
+      "alerts": []
     },
     {
       "id": 2,
-      "status": "online",
+      "status": "offline",
       "name": "Câmera 2",
       "url": "https://azt-mun.otteravision.com/azt/mun/mun.m3u8",
-      "altitude": 21,
-      "longitude": 1440,
+      "latitude": "031°23'12\"S",
+      "longitude": "123°12'31\"W",
       "areas": [],
       "pendingAlerts": false,
-      "epis": [1]
+      "epis": [1],
+      "alerts": []
     },
     {
       "id": 3,
-      "status": "online",
+      "status": "offline",
       "name": "Câmera 3",
       "url": "https://stream.fs1.tv/hls/webstream.m3u8",
-      "altitude": 21,
-      "longitude": 1440,
+      "latitude": "031°23'12\"S",
+     "longitude": "123°12'31\"W",
       "areas": [],
       "pendingAlerts": false,
-      "epis": []
+      "epis": [],
+      "alerts": []
     },
     {
       "id": 4,
-      "status": "online",
+      "status": "offline",
       "name": "Câmera 4",
       "url": "https://amg02855-foxsports-amg02855c1-xumo-us-1755.playouts.now.amagi.tv/Fox-Sports-AmazonNews/playlist.m3u8",
-      "altitude": 21,
-      "longitude": 1440,
+      "latitude": "031°23'12\"S",
+     "longitude": "123°12'31\"W",
       "areas": [],
       "pendingAlerts": false,
-      "epis": []
+      "epis": [],
+      "alerts": []
     }
   ],
   "epis": [
@@ -62,8 +66,14 @@
   "alerts": [
     {
       "id": 1,
-      "url": "sss",
-      "type": "EPI"
+      "type": "EPI",
+      "img" : "./alerts/cam6.jpg",
+      "date": "30/07/2025",
+      "time": "19:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44
     }
   ]
 }

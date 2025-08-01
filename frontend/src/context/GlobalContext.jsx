@@ -10,6 +10,8 @@ export const GlobalProvider = ({ children }) =>{
     const [showModal, setShowModal] = useState (false);
     const [typeModal, setTypeModal] = useState ("");
     const [choosenId, setChoosenId] = useState (0);
+    const [showToast, setShowToast] = useState(false);
+    
     
   /* Alert */
   function alert(icon, title, text){
@@ -24,7 +26,7 @@ export const GlobalProvider = ({ children }) =>{
 
   }
   return (
-    <GlobalContext.Provider value={{ data, setData, currentView, setCurrentView, lastView, setLastView, showModal, setShowModal, typeModal, setTypeModal, choosenId, setChoosenId, alert }}>
+    <GlobalContext.Provider value={{ data, setData, currentView, setCurrentView, lastView, setLastView, showModal, setShowModal, typeModal, setTypeModal, choosenId, setChoosenId, alert, showToast, setShowToast }}>
       {children}
     </GlobalContext.Provider>
   );

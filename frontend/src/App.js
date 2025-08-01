@@ -8,6 +8,7 @@ import CameraView from './views/CameraView';
 import AlertsView from './views/AlertsView';
 import StatisticsView from './views/StatisticsView';
 import ModalGeneral from './components/ModalGeneral';
+import ToastGeneral from './utilities/ToastGeneral';
 
 function App() {
 
@@ -24,9 +25,11 @@ function App() {
       {currentView === "StatisticsView" && <StatisticsView />}
 
       <Footer />
-
+      
       <ModalGeneral />
 
+      <ToastGeneral/>
+    
     </div>
   );
 }

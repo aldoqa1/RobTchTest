@@ -3,14 +3,28 @@ import { useRef, useEffect, useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import "./../assets/css/views/cameraview.css";
 import Swal from "sweetalert2";
+import moment from "moment";
+import AlertCard from "../components/AlertCard";
+
 
 function CameraView() {
 
-    const { data, setData, choosenId, alert } = useContext(GlobalContext);
+    const { data, setData, choosenId, alert, setShowToast, currentView } = useContext(GlobalContext);
 
     //camera
     let camera = {};
     const videoRef = useRef();
+    const dataRef = useRef();
+    const statusRef = useRef()
+
+    useEffect(() => {
+        dataRef.current = data;
+        statusRef.current = camera.status;
+    }, [data]);
+
+    useEffect(() => {
+        dataRef.current = data;
+    }, [currentView]);
 
     //canvas
     const canvasRef = useRef();
@@ -21,6 +35,11 @@ function CameraView() {
     const yWidth = useRef(0);
     const isDrawing = useRef(false);
 
+    const xInitialObject = useRef(0);
+    const yInitialObject = useRef(0);
+    const xWidthObject = useRef(0);
+    const yWidthObject = useRef(0);
+    
     //restrict areas
     const [restrictStep, setRestrictStep] = useState("");
     const [restrictInput, setRestrictInput] = useState("");
@@ -279,6 +298,7 @@ function CameraView() {
         canvas.addEventListener("mousemove", handleMouseMove);
         canvas.addEventListener("mouseleave", handleMouseLeave);
 
+
         //it turns the camera onlien by default
 
         if (Hls.isSupported()) {
@@ -286,10 +306,6 @@ function CameraView() {
             hls.loadSource(src);
             hls.attachMedia(video);
 
-            hls.on(Hls.Events.ERROR, (_event, info) => {
-                console.error("HLS error:", info, _event);
-                turningCamera("offline");
-            });
 
             //when it starts it turns the video online
             function handlePlaying() {
@@ -300,32 +316,10 @@ function CameraView() {
             function handlePause() {
                 if (video.paused) {
                     video.play().catch(err => {
-                        console.warn("It is not possible to play the stream:", err);
                         turningCamera("offline");
                     });
                 }
             };
-
-            //random interval between min 3 min - 6 min
-            const interval = setInterval(() => {
-
-                if (camera.status === "online" || camera.status === "alert") {
-                    const canvasBox = canvasBoxRef.current;
-                    const contextBox = canvasBox.getContext("2d");
-                    const container = canvasBox.parentElement;
-                    const w = canvasBox.width = container.clientWidth;
-                    const h = canvasBox.height = container.clientHeight;
-                    contextBox.lineWidth = 2;
-                    contextBox.strokeStyle = "yellow";
-
-                    setTimeout(() => {
-                        contextBox.clearRect(0, 0, canvasBox.width, canvasBox.height);
-                    }, 10000);
-
-                    contextBox.strokeRect(Math.random() * 0.84 * w + 1, Math.random() * 0.59 * h + 1, w * .15, h * .4);
-                }
-
-            }, Math.random() * 18000 + 2000);
 
             video.addEventListener("pause", handlePause);
             video.addEventListener("playing", handlePlaying);
@@ -335,7 +329,7 @@ function CameraView() {
                 hls.destroy();
                 video.removeEventListener("pause", handlePause);
                 video.removeEventListener("playing", handlePlaying);
-                clearInterval(interval);
+
             };
 
         } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
@@ -383,6 +377,8 @@ function CameraView() {
         }
 
 
+
+
         //it cleans the component (removing the events in memory)
         return function cleanComponent() {
             canvas.removeEventListener("mousedown", handleMouseDown);
@@ -390,6 +386,46 @@ function CameraView() {
             canvas.removeEventListener("mousemove", handleMouseMove);
             canvas.removeEventListener("mouseleave", handleMouseLeave);
         }
+
+    }, [camera.status]);
+
+    useEffect(() => {
+        //random interval between min 3 min - 6 min
+        const interval = setInterval(() => {
+
+            if (statusRef.current == "online") {
+                const canvasBox = canvasBoxRef.current;
+                const contextBox = canvasBox.getContext("2d");
+                const container = canvasBox.parentElement;
+                const w = canvasBox.width = container.clientWidth;
+                const h = canvasBox.height = container.clientHeight;
+                contextBox.lineWidth = 2;
+                contextBox.strokeStyle = "yellow";
+
+                const innerContainer = videoRef.current.parentElement;
+                innerContainer.classList.add("border-alert");                
+                xInitialObject.current= Math.random() * 0.84 * w + 1;
+                yInitialObject.current= Math.random() * 0.59 * h + 1;
+                xWidthObject.current= w * .15;
+                yWidthObject.current= h * .4;
+                createAlert();
+                contextBox.strokeRect(xInitialObject.current, yInitialObject.current, xWidthObject.current, yWidthObject.current);
+                
+                setTimeout(() => {
+                    contextBox.clearRect(0, 0, canvasBox.width, canvasBox.height);
+                    innerContainer.classList.remove("border-alert");
+                }, 10000);
+
+
+            }
+
+        }, Math.random() * 18000 + 2000);
+
+        //it cleans the component (removing the events in memory)
+        return function cleanComponent() {
+            clearInterval(interval);
+        }
+
 
     }, []);
 
@@ -412,6 +448,49 @@ function CameraView() {
         }
     }, [showRestrictAreas]);
 
+
+
+    function createAlert() {
+
+        const types = ["EPI", "invasion"];
+        let copyData = JSON.parse(JSON.stringify(dataRef.current));
+
+        //it gets the last id epi
+        const lastAlert = copyData.alerts.at(-1);
+        const lastId = lastAlert ? lastAlert.id : 0;
+
+        // date format "DD/MM/YYYY"
+        const date = moment().format('DD/MM/YYYY');
+
+        // time format "HH:mm:ss"
+        const time = moment().format('HH:mm:ss');
+
+        const alert = {
+            id: lastId + 1,
+            date: date,
+            time: time,
+            type: types[Math.round(Math.random())],
+            img: `./alerts/cam${Math.ceil(Math.random() * 20)}.jpg`,
+            x: xInitialObject.current,
+            y: yInitialObject.current,
+            w: xWidthObject.current,
+            h: yWidthObject.current
+        }
+
+        copyData.alerts = [...copyData.alerts, alert];
+        copyData.cameras = copyData.cameras.map((cam) => {
+            if (cam.id == camera.id) {
+                cam.alerts = [...cam.alerts, alert.id];
+            }
+            return cam;
+        })
+        //setting the new data into memory
+        setData(copyData);
+        //saving the object in local storage
+        localStorage.setItem('data', JSON.stringify(copyData));
+
+        setShowToast(true);
+    }
 
 
 
@@ -486,9 +565,9 @@ function CameraView() {
                 </div>
 
                 <section className="restricts">
-                    <div className="name-area d-flex justify-content-between">
+                    <div className="name-area d-flex flex-column flex-sm-row justify-content-between">
 
-                        <h3 className="my-4">Áreas restritas</h3>
+                        <h3 className="my-2">Áreas restritas</h3>
 
                         {restrictStep === "" && <button onClick={openInput} className="add-area">Adicionar área restrita <div className="icon add d-inline-block ms-2"></div></button>}
 
@@ -512,7 +591,7 @@ function CameraView() {
 
                     </div>
 
-                    <div className="areas">
+                    <div className="areas mt-3">
                         {camera.areas.length > 0 ? (
                             camera.areas.map((area) => (
                                 <div className="area" key={area.id}>{area.name} <button onClick={() => { openInputUpdate(area) }} className="ms-2 icon edit"></button> <button onClick={() => { deleteRestrictArea(area) }} className="icon delete"></button> </div>
@@ -551,31 +630,23 @@ function CameraView() {
 
                 <section className="alerts">
                     <h3 className="my-4 pt-3">Alertas</h3>
-                    <div className="alert d-flex flex-column flex-sm-row px-4 mb-3">
-                        <div className="img-container">
-                            <img src="./alerts/cam1.jpg" alt="imagem alerta" />
 
-                        </div>
 
-                        <div className="d-flex flex-column ms-4">
-                            <h4>Alerta 1</h4>
-                            <p>Dia 4 de marco a las 3 pm</p>
-                            <p>Alerta tipo EPI</p>
-                        </div>
-                    </div>
+                    {
 
-                    <div className="alert d-flex flex-column flex-sm-row px-4 mb-3">
-                        <div className="img-container">
-                            <img src="./alerts/cam2.jpg" alt="imagem alerta" />
+                        camera.alerts && camera.alerts.length > 0 ? [...camera.alerts].reverse().map((a, idx) => {
 
-                        </div>
+                            let foundAlert = data.alerts.find(element => element.id == a) || {};
 
-                        <div className="d-flex flex-column ms-4">
-                            <h4>Alerta 2</h4>
-                            <p>Dia 4 de marco a las 3 pm</p>
-                            <p>Alerta tipo EPI</p>
-                        </div>
-                    </div>
+
+                            return (
+                                <AlertCard foundAlert={foundAlert} camera={camera} idx={idx} />
+                            )
+                        })
+                            :
+                            <div>Sem alertas</div>
+                    }
+
                 </section>
 
 
@@ -583,6 +654,7 @@ function CameraView() {
 
 
             </div>
+
 
         </div>
 
