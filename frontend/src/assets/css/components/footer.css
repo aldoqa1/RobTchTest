@@ -68,5 +68,27 @@ footer .author{
 
 footer .author .link{
     color:                                                                                  var(--yellowColor);
-    font-weight:b                                                                           old;
+    font-weight:                                                                            bold;
+}
+
+footer .menu{
+    position:                                                                               fixed;
+    z-index:                                                                                1000;
+    bottom:                                                                                 30px;
+    right:                                                                                  20px;
+}
+
+footer .menu button{
+    background-color:                                                                       rgb(65, 65, 65);
+}
+
+footer .menu .epis{
+    background-color:                                                                       rgb(73, 61, 5);
+}
+
+
+@media (max-width: 576px) {
+  footer{
+    margin-bottom:                                                                          50px;
+  }
 }

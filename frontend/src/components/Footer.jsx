@@ -103,7 +103,7 @@ function Footer() {
 
             <div className='author mt-sm-0 mt-4'> <span>Projeto criado por <a href="https://aldoquevedo.tech/" className='link' target="_blank" rel="noopener noreferrer">Aldo Quevedo</a></span> </div>
 
-            <div className="d-flex  align-items-center justify-content-between" >
+            <div className="d-flex menu align-items-center justify-content-between" >
                 
                 {/* EPIS dropdown */}
                 <Dropdown onClick={(e) => e.stopPropagation()} drop="up" align="end" className="options-epis">
