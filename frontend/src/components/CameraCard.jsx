@@ -32,10 +32,10 @@ function CameraCard({ camera }) {
 
     //whenever the url of the camera or the status changes it'll try set the video
     useEffect(() => {
-
+ 
         const src = camera.url;
         const video = videoRef.current;
-
+       
         if (Hls.isSupported()) {
             const hls = new Hls();
             hls.loadSource(src);
@@ -64,7 +64,7 @@ function CameraCard({ camera }) {
     //this interval is just runned once in the beginning
     useEffect(() => {
 
-        //random interval between min 30 sg and 3 min
+        //random interval
         const interval = setInterval(() => {
 
             //it just draws if the status is online
@@ -99,9 +99,7 @@ function CameraCard({ camera }) {
                     innerContainer.classList.remove("border-alert");
                 }, 10000);
             }
-
-        }, Math.random() * 1500 + 15000);
-        // }, Math.random() * 150000 + 30000);
+        }, Math.random() * 100000 + 10000);
 
         //it clean the interval when the components is unmonted
         return function cleanComponent() {

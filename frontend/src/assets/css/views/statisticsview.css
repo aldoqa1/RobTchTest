@@ -1,29 +1,49 @@
 /*Statistics area*/
 .statistics .dropdowns{
-    z-index:                                                                                10000;
+    z-index:                                                                            10000;
 }
 
 .statistics .indicative{
-    color:                                                                                  var(--yellowColor);
+    color:                                                                              var(--yellowColor);
+}
+
+.statistics .apply{
+    color:                                                                              var(--greenColor);
+    border:                                                                             2px solid var(--greenColor);
+    margin-bottom:                                                                      5px;
+    width:                                                                              100%;
+}
+
+.statistics .cancel{
+    color:                                                                              var(--redColor);
+    border:                                                                             2px solid var(--redColor);
+    padding:                                                                            6px 10px;
+    height:                                                                             fit-content;
+    width:                                                                              100%;
+}
+
+.statistics.open-filter{
+    background-color:                                                                   rgb(60, 60, 61);
+    margin-bottom:                                                                      5px;
 }
 
 .statistics .date span{
-    font-size:                                                                              14px;
-    font-weight:                                                                            bold;
-    margin-top:                                                                             5px;
+    font-size:                                                                          14px;
+    font-weight:                                                                        bold;
+    margin-top:                                                                         5px;
 }
 
 .statistics .date input{
-    cursor:                                                                                 pointer;
-    width:                                                                                  130px;
-    padding:                                                                                3px;
-    border-radius:                                                                          3px;
-    background-color:                                                                       rgb(63, 64, 64);
-    color:                                                                                  white;
+    cursor:                                                                             pointer;
+    width:                                                                              130px;
+    padding:                                                                            3px;
+    border-radius:                                                                      3px;
+    background-color:                                                                   rgb(63, 64, 64);
+    color:                                                                              white;
+}
+/*it changes the icon color*/
+.statistics .date input[type="date"]::-webkit-calendar-picker-indicator {
+  filter:                                                                               invert(1); 
+  cursor:                                                                               pointer;
 }
 
-/*It changes the icon color in the date*/
-.statistics .date input[type="date"]::-webkit-calendar-picker-indicator {
-  filter:                                                                                   invert(1);
-  cursor:                                                                                   pointer;
-}

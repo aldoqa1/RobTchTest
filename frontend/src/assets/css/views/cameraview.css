@@ -112,7 +112,7 @@
     content:                                                                '';
 }
 
-.camera-view .robber.alert::after {
+.camera-view .EPI.alert::after {
     mask-image:                                                             url("./../../images/robber.svg");
 }
 

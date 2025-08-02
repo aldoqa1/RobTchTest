@@ -37,26 +37,10 @@ function DashboardView() {
 
             <div className="row g-3">
                 {data.cameras && data.cameras.map(camera => (
-                <div key={camera.id} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <div key={camera.id} className="col-12 col-md-6 col-xl-3">
                     <CameraCard camera={camera} />
                 </div>))}
             </div>
-                
-
-
-                        
-
-
-
-            <div onClick={()=>{console.log(data)}}>ver valor</div>
-            <div onClick={()=>{                
-                localStorage.setItem('data', JSON.stringify(null)); 
-                window.location.reload();}}
-            >REINICIAR</div>
-
-
-
-
 
         </div>
 

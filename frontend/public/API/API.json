@@ -9,8 +9,8 @@
       "longitude": "036°12'31\"E",
       "areas": [],
       "pendingAlerts": false,
-      "epis": [],
-      "alerts": []
+      "epis": [1],
+      "alerts": [5,6,7,8]
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "areas": [],
       "pendingAlerts": false,
       "epis": [1],
-      "alerts": []
+      "alerts": [16,17,18,19,20]
     },
     {
       "id": 3,
@@ -33,20 +33,56 @@
       "longitude": "002°12'31\"E",
       "areas": [],
       "pendingAlerts": false,
-      "epis": [],
+      "epis": [1,2],
       "alerts": []
     },
     {
       "id": 4,
       "status": "offline",
       "name": "Câmera 4",
-      "url": "https://amg02855-foxsports-amg02855c1-xumo-us-1755.playouts.now.amagi.tv/Fox-Sports-AmazonNews/playlist.m3u8",
-      "latitude": "52°23'12\"N",
+      "url": "https://channel01-onlymex.akamaized.net/hls/live/2022749/event01/index.m3u8",
+      "latitude": "052°23'12\"N",
      "longitude": "004°12'31\"E",
       "areas": [],
       "pendingAlerts": false,
+      "epis": [1],
+      "alerts": [1,2,3,4]
+    },
+    {
+      "id": 5,
+      "status": "offline",
+      "name": "Câmera jardim",
+      "url": "https://azt-mun.otteravision.com/azt/mun/mun.m3u8",
+      "latitude": "001°23'12\"S",
+     "longitude": "104°12'31\"E",
+      "areas": [],
+      "pendingAlerts": false,
+      "epis": [1,2],
+      "alerts": []
+    },
+    {
+      "id": 6,
+      "status": "offline",
+      "name": "Câmera prefeitura",
+      "url": "https://amg02855-foxsports-amg02855c1-xumo-us-1755.playouts.now.amagi.tv/Fox-Sports-AmazonNews/playlist.m3u8",
+      "latitude": "52°23'12\"S",
+     "longitude": "004°12'31\"E",
+      "areas": [],
+      "pendingAlerts": false,
+      "epis": [1],
+      "alerts": [9,10,11,12,13,14,15]
+    },
+    {
+      "id": 7,
+      "status": "offline",
+      "name": "Câmera hotel",
+      "url": "https://azt-mun.otteravision.com/azt/mun/mun.m3u8",
+      "latitude": "012°23'12\"N",
+     "longitude": "040°12'31\"W",
+      "areas": [],
+      "pendingAlerts": false,
       "epis": [],
-      "alerts": [1]
+      "alerts": []
     }
   ],
   "epis": [
@@ -68,13 +104,242 @@
       "id": 1,
       "type": "EPI",
       "img" : "./alerts/cam6.jpg",
-      "date": "30/07/2025",
-      "time": "19:22:05",
+      "date": "10/05/2025",
+      "time": "18:22:05",
       "x": 44,
       "y": 27,
       "w": 29,
       "h": 44,
       "createdByCamId": 4
+    },
+    {
+      "id": 2,
+      "type": "EPI",
+      "img" : "./alerts/cam16.jpg",
+      "date": "13/05/2025",
+      "time": "17:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 4
+    },
+    {
+      "id": 3,
+      "type": "EPI",
+      "img" : "./alerts/cam6.jpg",
+      "date": "14/05/2025",
+      "time": "16:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 4
+    },
+    {
+      "id": 4,
+      "type": "EPI",
+      "img" : "./alerts/cam2.jpg",
+      "date": "14/05/2025",
+      "time": "15:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 4
+    },
+    {
+      "id": 5,
+      "type": "EPI",
+      "img" : "./alerts/cam1.jpg",
+      "date": "14/05/2025",
+      "time": "14:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 1
+    },
+    {
+      "id": 6,
+      "type": "EPI",
+      "img" : "./alerts/cam4.jpg",
+      "date": "14/05/2025",
+      "time": "13:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 1
+    },
+    {
+      "id": 7,
+      "type": "EPI",
+      "img" : "./alerts/cam5.jpg",
+      "date": "19/05/2025",
+      "time": "12:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 1
+    },
+    {
+      "id": 8,
+      "type": "EPI",
+      "img" : "./alerts/cam7.jpg",
+      "date": "10/06/2025",
+      "time": "11:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 1
+    },
+    {
+      "id": 9,
+      "type": "EPI",
+      "img" : "./alerts/cam8.jpg",
+      "date": "11/06/2025",
+      "time": "10:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 6
+    },
+    {
+      "id": 10,
+      "type": "invasion",
+      "img" : "./alerts/cam9.jpg",
+      "date": "12/06/2025",
+      "time": "18:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 6
+    },
+    {
+      "id": 11,
+      "type": "invasion",
+      "img" : "./alerts/cam6.jpg",
+      "date": "12/06/2025",
+      "time": "17:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 6
+    },
+    {
+      "id": 12,
+      "type": "invasion",
+      "img" : "./alerts/cam10.jpg",
+      "date": "12/06/2025",
+      "time": "16:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 6
+    },
+    {
+      "id": 13,
+      "type": "invasion",
+      "img" : "./alerts/cam11.jpg",
+      "date": "17/06/2025",
+      "time": "15:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 6
+    },
+    {
+      "id": 14,
+      "type": "EPI",
+      "img" : "./alerts/cam12.jpg",
+      "date": "18/06/2025",
+      "time": "14:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 6
+    },
+    {
+      "id": 15,
+      "type": "EPI",
+      "img" : "./alerts/cam13.jpg",
+      "date": "19/06/2025",
+      "time": "13:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 6
+    },
+    {
+      "id": 16,
+      "type": "invasion",
+      "img" : "./alerts/cam14.jpg",
+      "date": "20/07/2025",
+      "time": "12:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 2
+    },
+    {
+      "id": 17,
+      "type": "EPI",
+      "img" : "./alerts/cam15.jpg",
+      "date": "21/07/2025",
+      "time": "11:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 2
+    },
+    {
+      "id": 18,
+      "type": "EPI",
+      "img" : "./alerts/cam6.jpg",
+      "date": "22/07/2025",
+      "time": "22:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 2
+    },
+    {
+      "id": 19,
+      "type": "EPI",
+      "img" : "./alerts/cam18.jpg",
+      "date": "30/07/2025",
+      "time": "13:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 2
+    },
+    {
+      "id": 20,
+      "type": "EPI",
+      "img" : "./alerts/cam19.jpg",
+      "date": "31/07/2025",
+      "time": "14:22:05",
+      "x": 44,
+      "y": 27,
+      "w": 29,
+      "h": 44,
+      "createdByCamId": 2
     }
+    
   ]
 }

@@ -101,7 +101,7 @@ function Footer() {
 
         <footer className="d-flex flex-column-reverse flex-sm-row  align-items-center justify-content-between">
 
-            <div className='author'> <span>Projeto criado por <a href="https://aldoquevedo.tech/" className='link' target="_blank" rel="noopener noreferrer">Aldo Quevedo</a></span> </div>
+            <div className='author mt-sm-0 mt-4'> <span>Projeto criado por <a href="https://aldoquevedo.tech/" className='link' target="_blank" rel="noopener noreferrer">Aldo Quevedo</a></span> </div>
 
             <div className="d-flex  align-items-center justify-content-between" >
                 
@@ -140,7 +140,7 @@ function Footer() {
 
                 {/* Buttons to open Alertas and Statisticas */}
                 <button className='d-flex ms-3 ' onClick={openAlerts}>Alertas<div className="icon arrow ms-1"></div></button>
-                <button className='d-flex ms-3' onClick={openStatistics}>Statisticas<div className="icon arrow ms-1"></div></button>
+                <button className='d-flex ms-3' onClick={openStatistics}>Estatisticas<div className="icon arrow ms-1"></div></button>
 
             </div>
 

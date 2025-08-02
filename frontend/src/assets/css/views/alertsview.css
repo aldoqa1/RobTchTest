@@ -65,6 +65,15 @@
     cursor:                                                                             pointer;
 }
 
+.invasion.alert::after {
+    mask-image:                                                             url("./../../images/robber.svg");
+}
+
+.EPI.alert::after {
+    mask-image:                                                             url("./../../images/protection.svg");
+}
+
+
 @media (max-width: 576px) {
     .alerts-view .img-container {
         margin:                                                                         10px auto;

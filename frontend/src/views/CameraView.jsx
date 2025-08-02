@@ -414,7 +414,7 @@ function CameraView() {
                 }, 10000);
             }
 
-        }, Math.random() * 150000 + 30000);
+        }, Math.random() * 100000 + 10000);
 
         //it cleans the component (removing the events in memory)
         return function cleanComponent() {

@@ -1,11 +1,10 @@
 import "./../assets/css/components/alertcard.css";
 import "./../assets/css/views/alertsview.css";
-import { GlobalContext } from "../context/GlobalContext";
 import { useContext, useEffect, useRef, useState } from "react";
+import { GlobalContext } from "../context/GlobalContext";
 import DropdownFilter from "../utilities/DropdownFilter";
-import moment from "moment";
-
 import AlertCard from "../components/AlertCard";
+import moment from "moment";
 
 
 function AlertsView() {
@@ -23,7 +22,7 @@ function AlertsView() {
     }
   ];
 
-  //Variable to filter the cata
+  //Variable to filter the data
   const [filterData, setFilterData] = useState(data);
   const [choosenTypes, setChoosenTypes] = useState([1, 2]);
   const [choosenCameras, setChoosenCameras] = useState([]);
@@ -52,7 +51,6 @@ function AlertsView() {
 
     //it updates the alerts filter
     copyData.alerts = copyData.alerts.filter((al) => {
-
       const alertDate = moment(al.date, "DD/MM/YYYY");
       return alertDate.isSameOrAfter(from) && alertDate.isSameOrBefore(to);
     });
@@ -70,6 +68,7 @@ function AlertsView() {
     count.current = 0;
   }
 
+  //it opnes the alert view 
   function openAlert(id){
     setCurrentView("CameraViewAlert");
     setLastView("StatisticsView");
@@ -135,13 +134,13 @@ function AlertsView() {
           
           {activateDateFilter && <div className="d-flex align-items-sm-center mt-3 mt-lg-0 flex-column">
             <span className="me-auto ms-2">Desde:</span>
-            <input type="date" className="ms-2 me-3" value={fromDate} onChange={(e) => setFromDate(e.target.value)} />
+            <input type="date" className="ms-2 me-3" value={fromDate || ""} onChange={(e) => setFromDate(e.target.value)} />
           </div>
           }
 
           {activateDateFilter && <div className="d-flex align-items-sm-center mt-3 mt-lg-0  flex-column">
             <span className="me-auto ms-2">Ate:</span>
-            <input className="ms-2" type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
+            <input className="ms-2" type="date" value={toDate || ""} onChange={(e) => setToDate(e.target.value)} />
           </div>}
 
         </div>

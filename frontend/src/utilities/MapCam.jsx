@@ -1,10 +1,8 @@
-// src/components/Mapa.js//
-//import React from 'react';
-import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 
-// Arregla el ícono de los marcadores (bug común en Leaflet con React)
+//it avoids to have mistakes when it comes to loading those icons
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
@@ -12,12 +10,15 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-function MapF({ data, setCurrentView, setLastView, setChoosenId }) {
+function MapCam({ data, setCurrentView, setLastView, setChoosenId }) {
+
+  //it becomes the center of the map
   const center = [14.6928, -17.4467]; // senegal
 
-  function dmsToDecimal(dmsStr) {
+  //it changes from DMS to decimal coords
+  function dmsToDecimal(date) {
     const regex = /(\d+)°(\d+)'(\d+)"([NSEW])/;
-    const match = dmsStr.match(regex);
+    const match = date.match(regex);
     if (!match) return null;
 
     const degrees = parseInt(match[1], 10);
@@ -44,18 +45,24 @@ function MapF({ data, setCurrentView, setLastView, setChoosenId }) {
         <Marker
           eventHandlers={{
             click: () => {
-              console.log("Cámara clickeada:", cam.name);
               setLastView("StatisticsView");
               setCurrentView("CameraView");
               setChoosenId(cam.id);
-              // Aquí puedes hacer más cosas: navegar, mostrar modal, etc.
             },
           }}
           key={cam.id + "map"}
           position={[dmsToDecimal(cam.latitude),
           dmsToDecimal(cam.longitude)]}>
           <Tooltip permanent direction="top" offset={[0, -10]}>
-            {cam.name}
+            <div className="d-flex flex-column">
+              <span>
+               {cam.name}
+              </span>
+              <span>
+                {`Alertas: ${cam.alerts.length}`}
+              </span>
+         
+            </div>
           </Tooltip>
         </Marker>
       ))}
@@ -63,4 +70,4 @@ function MapF({ data, setCurrentView, setLastView, setChoosenId }) {
   );
 };
 
-export default MapF;
+export default MapCam;
